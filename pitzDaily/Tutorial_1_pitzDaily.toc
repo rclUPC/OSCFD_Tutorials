@@ -1,0 +1,35 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Introduction and Theoretical Background}{3}{section.1}%
+\contentsline {subsection}{\numberline {1.1}What is pitzDaily?}{3}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Governing Equations}{3}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Case Overview}{4}{subsection.1.3}%
+\contentsline {section}{\numberline {2}Terminal Environment Setup}{4}{section.2}%
+\contentsline {subsection}{\numberline {2.1}Accessing OpenFOAM}{4}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Navigating to Tutorials}{4}{subsection.2.2}%
+\contentsline {section}{\numberline {3}Case Structure Exploration}{5}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Understanding OpenFOAM Directory Structure}{5}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Examining Key Files}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Running the Simulation}{6}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Pre-processing}{6}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Running simpleFoam}{7}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Monitoring Convergence}{7}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Post-Processing in Terminal}{8}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Basic Results Examination}{8}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Using OpenFOAM Command Line Tools}{8}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Basic Visualization in paraview}{9}{subsection.5.3}%
+\contentsline {section}{\numberline {6}Common Issues and Troubleshooting}{9}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Error: "command not found"}{9}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Error: "cannot find blockMeshDict"}{10}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Simulation Diverges (Residuals Grow)}{10}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Student Exercises and Extensions}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Basic Exercises (Required)}{11}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Advanced Exercises (Optional)}{11}{subsection.7.2}%
+\contentsline {section}{\numberline {8}Deliverables and Assessment}{11}{section.8}%
+\contentsline {subsection}{\numberline {8.1}Required Files}{12}{subsection.8.1}%
+\contentsline {subsection}{\numberline {8.2}Report Questions}{12}{subsection.8.2}%
+\contentsline {subsection}{\numberline {8.3}Submission Format}{12}{subsection.8.3}%
+\contentsline {section}{\numberline {A}Appendix: Useful Terminal Commands Reference}{13}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}OpenFOAM-Specific}{13}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}General Linux Commands}{13}{subsection.A.2}%
+\contentsline {section}{\numberline {B}Quick Reference: File Locations in pitzDaily}{13}{appendix.B}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 

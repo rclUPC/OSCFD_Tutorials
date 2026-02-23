@@ -1,0 +1,1009 @@
+% ==============================================
+% CFD Tutorial Template: OpenFOAM Terminal Basics
+% Class: scrartcl (KOMA-Script) - optimized for tutorials
+% Content: pitzDaily with simpleFoam
+% ==============================================
+
+\documentclass[
+    parskip=half,      % Space between paragraphs (better for steps)
+    DIV=12,            % Optimal margins for readability
+    headings=normal,   % Professional heading sizes
+    fontsize=11pt,     % Slightly larger for screen reading
+    english            % Language setting
+]{scrartcl}
+
+% ========== ESSENTIAL PACKAGES ==========
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{lmodern}
+\usepackage{geometry}
+\usepackage{tikz}
+\usepackage{microtype}           % Superior typography
+\usepackage{graphicx}            % For screenshots (optional)
+\usepackage{xcolor}              % Color coding
+\usepackage{listings}            % Code listings
+\usepackage{siunitx}             % Proper units: \si{\meter\per\second}
+\usepackage{amsmath}             % Math equations
+\usepackage{hyperref}            % Clickable links
+\usepackage{url}
+\usepackage{booktabs}            % Professional tables
+\usepackage{caption}             % Better figure captions
+\usepackage[english]{babel}
+
+% ========== CUSTOM COLORS ==========
+\definecolor{codebg}{RGB}{240, 245, 250}
+\definecolor{cmdcolor}{RGB}{0, 100, 0}
+\definecolor{outputcolor}{RGB}{100, 100, 150}
+\definecolor{warningcolor}{RGB}{180, 0, 0}
+\definecolor{tipcolor}{RGB}{0, 100, 50}
+
+% ========== CODE LISTING SETUP ==========
+\lstset{
+    backgroundcolor=\color{codebg},
+    basicstyle=\ttfamily\small,
+    breaklines=true,
+    frame=single,
+    captionpos=b,
+    rulecolor=\color{gray!30},
+    tabsize=2,
+    showstringspaces=false
+}
+
+% Custom style for terminal commands
+\lstdefinestyle{terminal}{
+    basicstyle=\ttfamily\small\color{cmdcolor},
+    backgroundcolor=\color{black!5},
+    frame=none,
+    columns=fullflexible
+}
+
+% Custom style for OpenFOAM files
+\lstdefinestyle{openfoam}{
+    language=C++,
+    morekeywords={dimensions, internalField, boundaryField, type, value},
+    keywordstyle=\color{blue},
+    commentstyle=\color{gray!50}\itshape
+}
+
+% ========== HYPERREF SETUP ==========
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    citecolor=green,
+    filecolor=magenta,
+    urlcolor=cyan,
+    pdftitle={OpenFOAM Tutorial: pitzDaily with simpleFoam},
+    pdfauthor={Your Name},
+    pdfsubject={CFD with OpenFOAM},
+    pdfkeywords={OpenFOAM, CFD, simpleFoam, pitzDaily, terminal}
+}
+
+
+\newcommand{\warning}[1]{\par\vspace{5pt}\noindent\textcolor{red}{\textbf{WARNING:}} #1\par\vspace{3pt}}
+\newcommand{\tip}[1]{\par\vspace{5pt}\noindent\textcolor{green!50!black}{\textbf{TIP:}} #1\par\vspace{3pt}}
+\newcommand{\important}[1]{\par\vspace{5pt}\noindent\textcolor{blue}{\textbf{IMPORTANT:}} #1\par\vspace{3pt}}                    
+
+% ========== CUSTOM COMMANDS ==========
+\newcommand{\terminalcmd}[1]{\textbf{\texttt{\textcolor{cmdcolor}{#1}}}}
+\newcommand{\ofkeyword}[1]{\textbf{\textcolor{blue}{#1}}}
+\newcommand{\filename}[1]{\texttt{\textcolor{purple}{#1}}}
+\newcommand{\commandexample}[1]{\vspace{5pt}\hspace{10pt}\terminalicon\ \terminalcmd{#1}\vspace{5pt}}
+
+% ========== DOCUMENT START ==========
+\begin{document}
+	
+	\title{Tutorial \#0: Linux Fundamentals for CFD}
+	\subtitle{Getting Started with Ubuntu 24.04, Bash Shell, and Git}
+	\subject{CFD Course Prerequisites}
+	\author{Your Name}
+	\date{\today}
+	
+	\maketitle
+	
+	\begin{abstract}
+		This tutorial introduces the essential Linux skills needed for the CFD course. You'll learn to set up Ubuntu 24.04, navigate the filesystem using the bash shell, write simple scripts, and use Git for version control. These foundations will prepare you for working with OpenFOAM, FreeCAD, and managing your CFD projects effectively.
+	\end{abstract}
+	
+	\tableofcontents
+	\newpage
+	
+	% ========== SECTION 1: UBUNTU 24.04 ==========
+	\section{Getting Started with Ubuntu 24.04 LTS}
+	
+	\subsection{What is Ubuntu?}
+	Ubuntu is a Linux distribution based on Debian, known for its user-friendliness and extensive community support. Version 24.04 is a \textbf{Long Term Support (LTS)} release, meaning it receives security updates and maintenance until 2029 [citation:7].
+	
+	\textbf{Why Ubuntu for CFD?}
+	\begin{itemize}
+		\item OpenFOAM is natively supported on Ubuntu
+		\item FreeCAD and CfdOF work seamlessly
+		\item Extensive documentation and community help
+		\item Package manager (APT) simplifies software installation
+	\end{itemize}
+	
+	\subsection{Installation Options}
+	
+	You have three ways to get Ubuntu:
+	
+	\begin{enumerate}[label=\textbf{Option \arabic*:}, leftmargin=*]
+		
+		\item \textbf{Dual Boot (Recommended)}: Install alongside Windows
+		\begin{itemize}
+			\item Best performance for CFD simulations
+			\item Access to all system resources
+			\item Requires partitioning your hard drive [citation:4]
+		\end{itemize}
+		
+		\item \textbf{Virtual Machine}: Run Ubuntu inside Windows
+		\begin{itemize}
+			\item Easier setup (using VirtualBox or Multipass)
+			\item Slightly slower for heavy computations
+			\item Good for testing and learning [citation:1]
+		\end{itemize}
+		
+		\item \textbf{Try Ubuntu from USB}: No installation needed
+		\begin{itemize}
+			\item Boot from USB without changing your system
+			\item Test hardware compatibility
+			\item Changes not saved between sessions [citation:1]
+		\end{itemize}
+	\end{enumerate}
+	
+	\subsection{Creating a Bootable USB Stick}
+	
+	\begin{enumerate}
+		\item \textbf{Download Ubuntu}: Get the ISO from \url{https://ubuntu.com/download}
+		\item \textbf{Create bootable USB}:
+		\begin{itemize}
+			\item \textbf{Windows}: Use \href{https://rufus.ie}{Rufus} [citation:1]
+			\item \textbf{Linux}: Use \texttt{dd} command or \texttt{Startup Disk Creator}
+			\item \textbf{macOS}: Use \href{https://www.balena.io/etcher}{balenaEtcher} [citation:1]
+		\end{itemize}
+	\end{enumerate}
+	
+	\tip{Rufus (Windows) or balenaEtcher (macOS) are the most user-friendly options.}
+	
+	\subsection{Installation Steps}
+	
+	\begin{enumerate}
+		\item Boot from USB (press \key{F12}, \key{F2}, or \key{Esc} during startup)
+		\item Select \textbf{"Try or Install Ubuntu"}
+		\item Choose language and keyboard layout
+		\item Connect to WiFi (optional but recommended)
+		\item Select \textbf{"Extended selection"} for more pre-installed apps
+		\item Enable \textbf{"Install third-party software"} for drivers and codecs [citation:4]
+		\item Choose installation type:
+		\begin{itemize}
+			\item "Install alongside Windows" for dual boot
+			\item "Erase disk and install Ubuntu" for clean install
+		\end{itemize}
+		\item Create user account and password
+		\item Wait for installation to complete and reboot
+	\end{enumerate}
+	
+	\warning{Back up your data before partitioning or installing any operating system!}
+	
+	\subsection{Post-Installation Setup}
+	
+	After first boot, run these essential updates:
+	
+	\begin{lstlisting}[style=terminal, caption=Initial system update]
+		# Update package lists
+		sudo apt update
+		
+		# Upgrade installed packages
+		sudo apt upgrade
+		
+		# Update snap packages
+		sudo snap refresh
+		
+		# Clean up unnecessary packages
+		sudo apt autoremove
+		sudo apt autoclean
+	\end{lstlisting}
+	
+	\important{Always run \texttt{sudo apt update} before installing new software to ensure you get the latest versions.}
+	
+	\subsection{Installing Essential Software}
+	
+	\begin{lstlisting}[style=terminal, caption=Install basic tools]
+		# Build essentials (compilers, make, etc.)
+		sudo apt install build-essential
+		
+		# Text editor
+		sudo apt install vim nano
+		
+		# System monitoring
+		sudo apt install htop btop neofetch
+		
+		# File utilities
+		sudo apt install tree ncdu
+		
+		# Compression tools
+		sudo apt install unzip p7zip-full
+	\end{lstlisting}
+	
+	\tip{Use \texttt{htop} to monitor system resources while running CFD simulations.}
+	
+	% ========== SECTION 2: BASH SHELL ==========
+	\section{The Bash Shell}
+	
+	\subsection{What is a Shell?}
+	The shell is a command-line interface that lets you interact with your operating system. \textbf{Bash} (Bourne Again SHell) is the default shell in Ubuntu and most Linux distributions [citation:5].
+	
+	\subsection{Opening the Terminal}
+	\begin{itemize}
+		\item Press \key{Ctrl+Alt+T}
+		\item Search for "Terminal" in applications menu
+		\item Right-click desktop → "Open in Terminal"
+	\end{itemize}
+	
+	\subsection{Navigating the Filesystem}
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{lll}
+			\toprule
+			\textbf{Command} & \textbf{Meaning} & \textbf{Example} \\
+			\midrule
+			\texttt{pwd} & Print Working Directory & \texttt{pwd} → \texttt{/home/username} \\
+			\texttt{ls} & List directory contents & \texttt{ls -la} (detailed view) \\
+			\texttt{cd} & Change Directory & \texttt{cd Documents} \\
+			\texttt{cd ..} & Go up one level & \texttt{cd ../..} (up two levels) \\
+			\texttt{cd \textasciitilde} & Go to home directory & \texttt{cd \textasciitilde} \\
+			\texttt{cd -} & Go to previous directory & \texttt{cd -} \\
+			\bottomrule
+		\end{tabular}
+		\caption{Essential navigation commands [citation:5]}
+	\end{table}
+	
+	\begin{lstlisting}[style=terminal, caption=Practice navigation]
+		# Where am I?
+		pwd
+		
+		# What's in this directory?
+		ls -la
+		
+		# Go to Documents
+		cd ~/Documents
+		
+		# Create a new directory
+		mkdir cfd_tutorials
+		
+		# Go into it
+		cd cfd_tutorials
+		
+		# Go back home
+		cd
+	\end{lstlisting}
+	
+	\subsection{File Operations}
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{lll}
+			\toprule
+			\textbf{Command} & \textbf{Purpose} & \textbf{Example} \\
+			\midrule
+			\texttt{cp} & Copy & \texttt{cp file1.txt file2.txt} \\
+			\texttt{mv} & Move/Rename & \texttt{mv oldname.txt newname.txt} \\
+			\texttt{rm} & Remove & \texttt{rm unwanted.txt} \\
+			\texttt{rm -r} & Remove directory & \texttt{rm -r old\_folder} \\
+			\texttt{mkdir} & Create directory & \texttt{mkdir newfolder} \\
+			\texttt{touch} & Create empty file & \texttt{touch newfile.txt} \\
+			\texttt{cat} & Display file & \texttt{cat README.md} \\
+			\texttt{less} & View file page by page & \texttt{less longfile.txt} \\
+			\bottomrule
+		\end{tabular}
+		\caption{File and directory operations}
+	\end{table}
+	
+	\warning{Be careful with \texttt{rm -r}! It permanently deletes files without a trash bin.}
+	
+	\subsection{Understanding Paths}
+	
+	\begin{itemize}
+		\item \textbf{Absolute path}: Starts from root directory
+		\begin{lstlisting}[style=terminal]
+			/home/username/Documents/cfd_tutorials
+		\end{lstlisting}
+		
+		\item \textbf{Relative path}: Relative to current location
+		\begin{lstlisting}[style=terminal]
+			Documents/cfd_tutorials  # If you're in /home/username
+			../Downloads            # One level up, then into Downloads
+		\end{lstlisting}
+	\end{itemize}
+	
+	\tip{Use \key{Tab} for auto-completion! Type the first few letters and press \key{Tab}.}
+	
+	\subsection{Useful Shortcuts}
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ll}
+			\toprule
+			\textbf{Shortcut} & \textbf{Function} \\
+			\midrule
+			\texttt{Ctrl+C} & Cancel current command \\
+			\texttt{Ctrl+Z} & Suspend current process \\
+			\texttt{Ctrl+D} & Exit shell/logout \\
+			\texttt{Ctrl+L} & Clear screen \\
+			\texttt{Ctrl+A} & Go to beginning of line \\
+			\texttt{Ctrl+E} & Go to end of line \\
+			\texttt{Ctrl+R} & Search command history \\
+			\texttt{Up/Down arrows} & Navigate command history \\
+			\texttt{Tab} & Auto-complete filenames/commands \\
+			\bottomrule
+		\end{tabular}
+		\caption{Keyboard shortcuts for terminal efficiency}
+	\end{table}
+	
+	\subsection{Wildcards and Pattern Matching}
+	
+	\begin{lstlisting}[style=terminal, caption=Using wildcards]
+		# List all .txt files
+		ls *.txt
+		
+		# Remove all backup files
+		rm *.bak
+		
+		# List files starting with 'data' followed by any characters
+		ls data*
+		
+		# List files with single-character wildcard
+		ls data?.csv  # matches data1.csv, data2.csv, but not data10.csv
+	\end{lstlisting}
+	
+	\subsection{Input/Output Redirection}
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{lll}
+			\toprule
+			\textbf{Operator} & \textbf{Meaning} & \textbf{Example} \\
+			\midrule
+			\texttt{>} & Redirect output to file (overwrite) & \texttt{ls > filelist.txt} \\
+			\texttt{>>} & Redirect output to file (append) & \texttt{echo "new" >> file.txt} \\
+			\texttt{<} & Take input from file & \texttt{sort < unsorted.txt} \\
+			\texttt{|} & Pipe output to another command & \texttt{ls -la | grep "txt"} \\
+			\bottomrule
+		\end{tabular}
+		\caption{Redirection and pipes}
+	\end{table}
+	
+	\begin{lstlisting}[style=terminal, caption=Pipe examples]
+		# Count files in directory
+		ls -1 | wc -l
+		
+		# Find specific files
+		ls -la | grep "cfd"
+		
+		# Sort and display unique
+		cat data.txt | sort | uniq
+	\end{lstlisting}
+	
+	\subsection{Process Management}
+	
+	\begin{lstlisting}[style=terminal, caption=Managing running processes]
+		# List running processes
+		ps aux
+		
+		# Interactive process viewer
+		htop
+		
+		# Run command in background
+		./longsimulation.sh &
+		
+		# Bring background job to foreground
+		fg
+		
+		# Kill a process
+		kill -9 PID
+	\end{lstlisting}
+	
+	% ========== SECTION 3: BASH SCRIPTING ==========
+	\section{Introduction to Bash Scripting}
+	
+	\subsection{What is a Shell Script?}
+	A shell script is a text file containing a series of commands that can be executed as a program. This automates repetitive tasks [citation:2].
+	
+	\subsection{Your First Script}
+	
+	\begin{enumerate}
+		\item Create a new file:
+		\begin{lstlisting}[style=terminal]
+			nano firstscript.sh
+		\end{lstlisting}
+		
+		\item Add the following content [citation:2]:
+		\begin{lstlisting}[style=bashscript, caption=hello.sh]
+			#!/bin/bash
+			# This is a comment - my first script
+			
+			echo "Hello, CFD world!"
+			echo "Current directory: $(pwd)"
+			echo "Files here:"
+			ls -la
+		\end{lstlisting}
+		
+		\item Make it executable:
+		\begin{lstlisting}[style=terminal]
+			chmod +x firstscript.sh
+		\end{lstlisting}
+		
+		\item Run it:
+		\begin{lstlisting}[style=terminal]
+			./firstscript.sh
+		\end{lstlisting}
+	\end{enumerate}
+	
+	\important{The line \texttt{\#!/bin/bash} (shebang) tells the system which interpreter to use. Without it, the script won't execute properly [citation:2].}
+	
+	\subsection{Variables in Bash}
+	
+	\begin{lstlisting}[style=bashscript, caption=variables.sh]
+		#!/bin/bash
+		
+		# Defining variables (no spaces around =)
+		name="Student"
+		course="CFD"
+		simulation_time=3600
+		
+		# Using variables (with $)
+		echo "Hello, $name!"
+		echo "Welcome to $course course."
+		
+		# Command substitution - store command output
+		files=$(ls -la)
+		echo "Files in current directory: $files"
+		
+		# Arithmetic
+		a=10
+		b=20
+		sum=$((a + b))
+		echo "Sum: $sum"
+	\end{lstlisting}
+	
+	\subsection{Special Variables [citation:2]}
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ll}
+			\toprule
+			\textbf{Variable} & \textbf{Meaning} \\
+			\midrule
+			\texttt{\$0} & Script name \\
+			\texttt{\$1}, \texttt{\$2}, ... & Positional parameters (arguments) \\
+			\texttt{\$#} & Number of arguments \\
+			\texttt{\$*} & All arguments as single string \\
+			\texttt{\$@} & All arguments as separate strings \\
+			\texttt{\$?} & Exit status of last command \\
+			\texttt{\$\$} & Process ID of current script \\
+			\bottomrule
+		\end{tabular}
+		\caption{Special shell variables}
+	\end{table}
+	
+	\begin{lstlisting}[style=bashscript, caption=arguments.sh]
+		#!/bin/bash
+		echo "Script name: $0"
+		echo "First argument: $1"
+		echo "Second argument: $2"
+		echo "Number of arguments: $#"
+		echo "All arguments: $@"
+		
+		if [ $# -eq 0 ]; then
+		echo "Error: No arguments provided!"
+		exit 1
+		fi
+	\end{lstlisting}
+	
+	\subsection{Conditional Statements}
+	
+	\begin{lstlisting}[style=bashscript, caption=conditions.sh]
+		#!/bin/bash
+		
+		# File tests [citation:2]
+		if [ -e "mesh.geo" ]; then
+		echo "mesh.geo exists"
+		else
+		echo "mesh.geo not found"
+		fi
+		
+		# String comparison
+		name="OpenFOAM"
+		if [ "$name" = "OpenFOAM" ]; then
+		echo "Correct solver"
+		fi
+		
+		# Numeric comparison
+		value=10
+		if [ $value -gt 5 ]; then
+		echo "Value is greater than 5"
+		fi
+	\end{lstlisting}
+	
+	\begin{table}[h]
+		\centering
+		\begin{tabular}{ll}
+			\toprule
+			\textbf{Operator} & \textbf{Meaning} \\
+			\midrule
+			\multicolumn{2}{l}{\textbf{File tests}} \\
+			\texttt{-e file} & File exists \\
+			\texttt{-f file} & File exists and is regular file \\
+			\texttt{-d file} & File exists and is directory \\
+			\multicolumn{2}{l}{\textbf{Numeric comparisons}} \\
+			\texttt{-eq} & Equal to \\
+			\texttt{-ne} & Not equal to \\
+			\texttt{-lt} & Less than \\
+			\texttt{-gt} & Greater than \\
+			\multicolumn{2}{l}{\textbf{String comparisons}} \\
+			\texttt{=} & Strings equal \\
+			\texttt{!=} & Strings not equal \\
+			\texttt{-z} & String is empty \\
+			\bottomrule
+		\end{tabular}
+		\caption{Common test operators [citation:2]}
+	\end{table}
+	
+	\subsection{Loops}
+	
+	\begin{lstlisting}[style=bashscript, caption=loops.sh]
+		#!/bin/bash
+		
+		# For loop over explicit values
+		echo "=== For loop with values ==="
+		for fruit in apple banana orange; do
+		echo "I like $fruit"
+		done
+		
+		# For loop with range
+		echo "=== For loop with range ==="
+		for i in {1..5}; do
+		echo "Iteration $i"
+		done
+		
+		# For loop over files
+		echo "=== For loop over files ==="
+		for file in *.txt; do
+		echo "Processing $file"
+		wc -l "$file"
+		done
+		
+		# While loop
+		echo "=== While loop ==="
+		counter=1
+		while [ $counter -le 5 ]; do
+		echo "Counter: $counter"
+		counter=$((counter + 1))
+		done
+	\end{lstlisting}
+	
+	\subsection{Reading User Input [citation:8]}
+	
+	\begin{lstlisting}[style=bashscript, caption=input.sh]
+		#!/bin/bash
+		
+		# Basic input
+		echo -n "Enter your name: "
+		read name
+		echo "Hello, $name!"
+		
+		# Prompt with message
+		read -p "Enter Reynolds number: " Re
+		echo "Reynolds number: $Re"
+		
+		# Hidden input (for passwords)
+		read -s -p "Enter password: " password
+		echo "Password accepted."
+		
+		# Read multiple values
+		read -p "Enter x y z coordinates: " x y z
+		echo "Coordinates: ($x, $y, $z)"
+	\end{lstlisting}
+	
+	% ========== SECTION 4: GIT BASICS ==========
+	\section{Version Control with Git}
+	
+	\subsection{What is Git?}
+	Git is a distributed version control system created by Linus Torvalds in 2005 for Linux kernel development [citation:6]. It tracks changes to files, enables collaboration, and maintains complete history of your projects.
+	
+	\textbf{Why Git for CFD?}
+	\begin{itemize}
+		\item Track changes to simulation setups
+		\item Collaborate with team members
+		\item Revert to working versions when experiments fail
+		\item Share cases with reproducibility
+	\end{itemize}
+	
+	\subsection{Installing and Configuring Git}
+	
+	\begin{lstlisting}[style=terminal, caption=Install Git]
+		sudo apt install git
+		git --version  # Verify installation
+	\end{lstlisting}
+	
+	\subsection{First-Time Setup [citation:6]}
+	
+	\begin{lstlisting}[style=terminal, caption=Configure Git]
+		# Set your identity (required for commits)
+		git config --global user.name "Your Name"
+		git config --global user.email "your.email@example.com"
+		
+		# Set default editor
+		git config --global core.editor "nano"
+		
+		# View all settings
+		git config --list
+	\end{lstlisting}
+	
+	\subsection{Creating Your First Repository}
+	
+	\begin{lstlisting}[style=terminal, caption=Initialize a repository]
+		# Create project directory
+		mkdir pitzDaily_case
+		cd pitzDaily_case
+		
+		# Initialize Git repository
+		git init
+		
+		# Check status (should show empty repo)
+		git status
+	\end{lstlisting}
+	
+	After \texttt{git init}, you'll have a hidden \texttt{.git} directory containing all version control information [citation:3].
+	
+	\subsection{Basic Git Workflow}
+	
+	The typical Git workflow has three stages [citation:6]:
+	
+	\begin{enumerate}
+		\item \textbf{Working Directory}: Where you edit files
+		\item \textbf{Staging Area} (index): Where you prepare changes
+		\item \textbf{Repository}: Where commits are permanently stored
+	\end{enumerate}
+	
+	\begin{figure}[h]
+		\centering
+		\begin{verbatim}
+			Working Directory    git add    Staging Area    git commit    Repository
+			(files)        -------->    (index)       -------->    (commits)
+			^                                                       |
+			|                                                       |
+			+------------------ git checkout <----------------------+
+		\end{verbatim}
+		\caption{Git workflow stages}
+	\end{figure}
+	
+	\subsection{Tracking Changes}
+	
+	\begin{lstlisting}[style=terminal, caption=First commit]
+		# Create a file
+		echo "# pitzDaily Simulation" > README.md
+		echo "U uniform (10 0 0);" > 0/U
+		
+		# Check status
+		git status
+		
+		# Stage files
+		git add README.md
+		git add 0/U
+		
+		# Or stage all changes
+		git add .
+		
+		# Check status again (files now staged)
+		git status
+		
+		# Commit with message
+		git commit -m "Initial case setup: README and velocity BC"
+		
+		# View commit history
+		git log --oneline
+	\end{lstlisting}
+	
+	\subsection{Checking Differences [citation:3]}
+	
+	\begin{lstlisting}[style=terminal, caption=Viewing changes]
+		# See unstaged changes
+		git diff
+		
+		# See staged changes
+		git diff --staged
+		
+		# Compare with previous commit
+		git diff HEAD^
+		
+		# Show specific commit
+		git show COMMIT_HASH
+	\end{lstlisting}
+	
+	\subsection{Viewing History}
+	
+	\begin{lstlisting}[style=terminal, caption=git log examples]
+		# Simple log
+		git log --oneline
+		
+		# Detailed log with graph
+		git log --graph --oneline --decorate --all
+		
+		# Show last 3 commits
+		git log -3
+		
+		# Search commits by message
+		git log --grep="mesh refinement"
+	\end{lstlisting}
+	
+	The output shows commit hash, author, date, and message [citation:3]:
+	\begin{lstlisting}[style=output]
+		abc1234 (HEAD -> main) Update boundary conditions
+		def5678 Add mesh refinement study
+		ghi9012 Initial commit
+	\end{lstlisting}
+	
+	\subsection{Ignoring Files}
+	
+	Create \filename{.gitignore} to exclude files from version control:
+	
+	\begin{lstlisting}[style=bashscript, caption=.gitignore]
+		# Ignore OpenFOAM processor directories
+		processor*/
+		
+		# Ignore log files
+		*.log
+		log.*
+		
+		# Ignore backup files
+		*~
+		*.bak
+		
+		# Ignore large result files
+		*.vtk
+		*.foam
+		
+		# Ignore IDE files
+		.vscode/
+		.idea/
+	\end{lstlisting}
+	
+	\subsection{Undoing Changes}
+	
+	\begin{lstlisting}[style=terminal, caption=Fixing mistakes]
+		# Unstage a file (keep changes)
+		git reset HEAD filename
+		
+		# Discard changes in working directory
+		git checkout -- filename
+		
+		# Amend last commit (fix message or add forgotten files)
+		git commit --amend -m "Better commit message"
+		
+		# Revert to previous commit (creates new commit)
+		git revert HEAD
+	\end{lstlisting}
+	
+	\warning{Be careful with \texttt{git reset} and \texttt{git checkout} as they can permanently discard changes!}
+	
+	\subsection{Working with Remotes (GitHub)}
+	
+	\begin{enumerate}
+		\item \textbf{Create GitHub account}: \url{https://github.com}
+		\item \textbf{Create new repository} on GitHub (don't initialize with README)
+		\item \textbf{Connect local repository} [citation:6]:
+	\end{enumerate}
+	
+	\begin{lstlisting}[style=terminal, caption=Adding remote]
+		# Add remote repository
+		git remote add origin https://github.com/username/pitzDaily_case.git
+		
+		# Verify remote
+		git remote -v
+		
+		# Push to GitHub
+		git push -u origin main
+	\end{lstlisting}
+	
+	\subsection{Cloning and Pulling}
+	
+	\begin{lstlisting}[style=terminal, caption=Working with existing repositories]
+		# Clone a repository
+		git clone https://github.com/username/pitzDaily_case.git
+		
+		# Get latest changes
+		git pull
+		
+		# Fetch without merging
+		git fetch
+	\end{lstlisting}
+	
+	\subsection{Branching (Advanced)}
+	
+	Branches allow parallel development [citation:3]:
+	
+	\begin{lstlisting}[style=terminal, caption=Branch basics]
+		# List branches
+		git branch
+		
+		# Create new branch
+		git branch mesh-refinement
+		
+		# Switch to branch
+		git checkout mesh-refinement
+		
+		# Create and switch in one command
+		git checkout -b turbulence-study
+		
+		# Merge branch into main
+		git checkout main
+		git merge mesh-refinement
+		
+		# Delete branch
+		git branch -d mesh-refinement
+	\end{lstlisting}
+	
+	% ========== SECTION 5: PRACTICE EXERCISES ==========
+	\section{Practice Exercises}
+	
+	\subsection{Exercise 1: Filesystem Navigation}
+	\begin{enumerate}
+		\item Create directory structure: \texttt{cfd-course/tutorials/pitzDaily}
+		\item Navigate to this directory
+		\item Create files: \texttt{README.md}, \texttt{0/U}, \texttt{constant/transportProperties}
+		\item List all files recursively
+		\item Count number of files in the project
+	\end{enumerate}
+	
+	\subsection{Exercise 2: Bash Scripting}
+	Create a script \texttt{setup\_case.sh} that:
+	\begin{enumerate}
+		\item Checks if directory exists, creates if not
+		\item Prompts user for Reynolds number
+		\item Creates basic OpenFOAM file structure
+		\item Prints summary of what was created
+	\end{enumerate}
+	
+	Solution template:
+	\begin{lstlisting}[style=bashscript]
+		#!/bin/bash
+		# CFD case setup script
+		
+		case_name=$1
+		if [ -z "$case_name" ]; then
+		read -p "Enter case name: " case_name
+		fi
+		
+		# Your code here...
+	\end{lstlisting}
+	
+	\subsection{Exercise 3: Git Practice}
+	\begin{enumerate}
+		\item Initialize Git repository in your case directory
+		\item Create and commit initial files
+		\item Make changes, view differences
+		\item View commit history
+		\item Create \texttt{.gitignore} for CFD files
+		\item Push to GitHub (create account if needed)
+	\end{enumerate}
+	
+	\subsection{Exercise 4: Combine Skills}
+	Create a script that:
+	\begin{enumerate}
+		\item Creates a new Git repository
+		\item Sets up standard CFD case structure
+		\item Makes initial commit
+		\item Displays repository status and log
+	\end{enumerate}
+	
+	% ========== SECTION 6: TROUBLESHOOTING ==========
+	\section{Common Issues and Solutions}
+	
+	\subsection{Permission Denied}
+	\begin{lstlisting}[style=terminal]
+		# Make script executable
+		chmod +x script.sh
+		
+		# Check permissions
+		ls -la script.sh
+	\end{lstlisting}
+	
+	\subsection{Command Not Found}
+	\begin{lstlisting}[style=terminal]
+		# Check if installed
+		which command_name
+		
+		# Install if missing
+		sudo apt install package_name
+	\end{lstlisting}
+	
+	\subsection{Git Push Rejected}
+	\begin{lstlisting}[style=terminal]
+		# Pull changes first
+		git pull origin main
+		
+		# Resolve conflicts if any
+		# Then push again
+		git push origin main
+	\end{lstlisting}
+	
+	% ========== SECTION 7: RESOURCES ==========
+	\section{Additional Resources}
+	
+	\subsection{Online Tutorials}
+	\begin{itemize}
+		\item \href{https://ubuntu.com/tutorials}{Ubuntu Official Tutorials}
+		\item \href{https://southampton-rsg-training.github.io/shell-novice/}{The Bash Shell} - Southampton course [citation:5]
+		\item \href{https://git-scm.com/doc}{Official Git Documentation}
+		\item \href{https://training.bwhpc.de/ilias.php}{Bash Scripting Module} [citation:2]
+	\end{itemize}
+	
+	\subsection{Cheat Sheets}
+	\begin{itemize}
+		\item Ubuntu keyboard shortcuts
+		\item Bash commands reference
+		\item Git quick reference
+	\end{itemize}
+	
+	\subsection{Books}
+	\begin{itemize}
+		\item "The Ultimate Ubuntu Handbook" by Ken VanDine [citation:10]
+		\item "Pro Git" by Scott Chacon (free online)
+	\end{itemize}
+	
+	\subsection{Community}
+	\begin{itemize}
+		\item \href{https://askubuntu.com}{Ask Ubuntu}
+		\item \href{https://stackoverflow.com}{Stack Overflow} (tag: bash, git)
+		\item \href{https://discourse.ubuntu.com}{Ubuntu Discourse}
+	\end{itemize}
+	
+	% ========== CONCLUSION ==========
+	\section{What's Next?}
+	
+	You're now ready for:
+	\begin{itemize}
+		\item \textbf{Tutorial \#1}: OpenFOAM terminal workflow with pitzDaily
+		\item \textbf{Tutorial \#2}: FreeCAD and CfdOF GUI workflow
+		\item Advanced CFD topics
+	\end{itemize}
+	
+	\important{Keep practicing! The command line becomes intuitive with regular use.}
+	
+	% ========== APPENDIX ==========
+	\appendix
+	\section{Quick Reference Cards}
+	
+	\subsection{Ubuntu Shortcuts}
+	\begin{tabular}{ll}
+		\texttt{Super} & Open activities overview \\
+		\texttt{Super + A} & Show applications \\
+		\texttt{Super + D} & Show desktop \\
+		\texttt{Alt + Tab} & Switch applications \\
+		\texttt{Ctrl + Alt + T} & Open terminal \\
+		\texttt{PrtScn} & Take screenshot \\
+	\end{tabular}
+	
+	\subsection{Bash Commands Summary}
+	\begin{tabular}{ll}
+		\texttt{ls -la} & List all files with details \\
+		\texttt{cp -r} & Copy recursively \\
+		\texttt{grep pattern file} & Search in files \\
+		\texttt{history} & Show command history \\
+		\texttt{man command} & Show manual \\
+		\texttt{which program} & Locate program \\
+	\end{tabular}
+	
+	\subsection{Git Commands Summary}
+	\begin{tabular}{ll}
+		\texttt{git init} & Initialize repository \\
+		\texttt{git add} & Stage changes \\
+		\texttt{git commit -m "msg"} & Commit staged changes \\
+		\texttt{git status} & Check status \\
+		\texttt{git log} & View history \\
+		\texttt{git diff} & Show changes \\
+		\texttt{git push} & Upload to remote \\
+		\texttt{git pull} & Download from remote \\
+	\end{tabular}
+
+\end{document}

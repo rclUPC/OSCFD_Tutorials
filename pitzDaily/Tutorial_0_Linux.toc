@@ -1,0 +1,60 @@
+\babel@toc {english}{}\relax 
+\contentsline {section}{\numberline {1}Getting Started with Ubuntu 24.04 LTS}{4}{section.1}%
+\contentsline {subsection}{\numberline {1.1}What is Ubuntu?}{4}{subsection.1.1}%
+\contentsline {subsection}{\numberline {1.2}Installation Options}{4}{subsection.1.2}%
+\contentsline {subsection}{\numberline {1.3}Creating a Bootable USB Stick}{5}{subsection.1.3}%
+\contentsline {subsection}{\numberline {1.4}Installation Steps}{5}{subsection.1.4}%
+\contentsline {subsection}{\numberline {1.5}Post-Installation Setup}{6}{subsection.1.5}%
+\contentsline {subsection}{\numberline {1.6}Installing Essential Software}{6}{subsection.1.6}%
+\contentsline {section}{\numberline {2}The Bash Shell}{7}{section.2}%
+\contentsline {subsection}{\numberline {2.1}What is a Shell?}{7}{subsection.2.1}%
+\contentsline {subsection}{\numberline {2.2}Opening the Terminal}{7}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Navigating the Filesystem}{7}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}File Operations}{8}{subsection.2.4}%
+\contentsline {subsection}{\numberline {2.5}Understanding Paths}{8}{subsection.2.5}%
+\contentsline {subsection}{\numberline {2.6}Useful Shortcuts}{8}{subsection.2.6}%
+\contentsline {subsection}{\numberline {2.7}Wildcards and Pattern Matching}{8}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}Input/Output Redirection}{9}{subsection.2.8}%
+\contentsline {subsection}{\numberline {2.9}Process Management}{10}{subsection.2.9}%
+\contentsline {section}{\numberline {3}Introduction to Bash Scripting}{10}{section.3}%
+\contentsline {subsection}{\numberline {3.1}What is a Shell Script?}{10}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Your First Script}{10}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Variables in Bash}{11}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}Special Variables [citation:2]}{11}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Conditional Statements}{12}{subsection.3.5}%
+\contentsline {subsection}{\numberline {3.6}Loops}{13}{subsection.3.6}%
+\contentsline {subsection}{\numberline {3.7}Reading User Input [citation:8]}{14}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Version Control with Git}{14}{section.4}%
+\contentsline {subsection}{\numberline {4.1}What is Git?}{14}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Installing and Configuring Git}{15}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}First-Time Setup [citation:6]}{15}{subsection.4.3}%
+\contentsline {subsection}{\numberline {4.4}Creating Your First Repository}{15}{subsection.4.4}%
+\contentsline {subsection}{\numberline {4.5}Basic Git Workflow}{15}{subsection.4.5}%
+\contentsline {subsection}{\numberline {4.6}Tracking Changes}{16}{subsection.4.6}%
+\contentsline {subsection}{\numberline {4.7}Checking Differences [citation:3]}{16}{subsection.4.7}%
+\contentsline {subsection}{\numberline {4.8}Viewing History}{17}{subsection.4.8}%
+\contentsline {subsection}{\numberline {4.9}Ignoring Files}{17}{subsection.4.9}%
+\contentsline {subsection}{\numberline {4.10}Undoing Changes}{18}{subsection.4.10}%
+\contentsline {subsection}{\numberline {4.11}Working with Remotes (GitHub)}{18}{subsection.4.11}%
+\contentsline {subsection}{\numberline {4.12}Cloning and Pulling}{19}{subsection.4.12}%
+\contentsline {subsection}{\numberline {4.13}Branching (Advanced)}{19}{subsection.4.13}%
+\contentsline {section}{\numberline {5}Practice Exercises}{19}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Exercise 1: Filesystem Navigation}{19}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Exercise 2: Bash Scripting}{20}{subsection.5.2}%
+\contentsline {subsection}{\numberline {5.3}Exercise 3: Git Practice}{20}{subsection.5.3}%
+\contentsline {subsection}{\numberline {5.4}Exercise 4: Combine Skills}{21}{subsection.5.4}%
+\contentsline {section}{\numberline {6}Common Issues and Solutions}{21}{section.6}%
+\contentsline {subsection}{\numberline {6.1}Permission Denied}{21}{subsection.6.1}%
+\contentsline {subsection}{\numberline {6.2}Command Not Found}{21}{subsection.6.2}%
+\contentsline {subsection}{\numberline {6.3}Git Push Rejected}{21}{subsection.6.3}%
+\contentsline {section}{\numberline {7}Additional Resources}{22}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Online Tutorials}{22}{subsection.7.1}%
+\contentsline {subsection}{\numberline {7.2}Cheat Sheets}{22}{subsection.7.2}%
+\contentsline {subsection}{\numberline {7.3}Books}{22}{subsection.7.3}%
+\contentsline {subsection}{\numberline {7.4}Community}{22}{subsection.7.4}%
+\contentsline {section}{\numberline {8}What's Next?}{22}{section.8}%
+\contentsline {section}{\numberline {A}Quick Reference Cards}{23}{appendix.A}%
+\contentsline {subsection}{\numberline {A.1}Ubuntu Shortcuts}{23}{subsection.A.1}%
+\contentsline {subsection}{\numberline {A.2}Bash Commands Summary}{23}{subsection.A.2}%
+\contentsline {subsection}{\numberline {A.3}Git Commands Summary}{23}{subsection.A.3}%
+\providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
