@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.28)  23 FEB 2026 17:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.28)  23 FEB 2026 18:08
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1032,7 +1032,7 @@ Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
 Package caption Info: End \AtBeginDocument code.
 LaTeX Font Info:    Trying to load font information for T1+lmss on input line 3
-4.
+5.
 
 (/usr/share/texmf/tex/latex/lm/t1lmss.fd
 File: t1lmss.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1042,42 +1042,42 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Trying to load font information for OT1+lmr on input line 3
-4.
+5.
 
 (/usr/share/texmf/tex/latex/lm/ot1lmr.fd
 File: ot1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OML+lmm on input line 3
-4.
+5.
 
 (/usr/share/texmf/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMS+lmsy on input line 
-34.
+35.
 
 (/usr/share/texmf/tex/latex/lm/omslmsy.fd
 File: omslmsy.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    Trying to load font information for OMX+lmex on input line 
-34.
+35.
 
 (/usr/share/texmf/tex/latex/lm/omxlmex.fd
 File: omxlmex.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <14.4> on input line 34.
+(Font)              <14.4> on input line 35.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10> on input line 34.
+(Font)              <10> on input line 35.
 LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <7> on input line 34.
+(Font)              <7> on input line 35.
 LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
-4.
+5.
 
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-Package tocbasic Info: character protrusion at toc deactivated on input line 40
+Package tocbasic Info: character protrusion at toc deactivated on input line 41
 .
  (./Tutorial_0_Linux.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
@@ -1096,7 +1096,7 @@ dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}] [2])
 
  [3]
 LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 8
-4.
+5.
 
 (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
 File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
@@ -1106,19 +1106,19 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             For optimal results, create family-specific settings.
 (microtype)             See the microtype manual for details.
 LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 93.
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 94.
  [4]
 Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 124.
+nput line 125.
  [5] [6] [7] [8] [9] [10] [11]
 [12] [13] [14] [15]
-Overfull \hbox (12.90129pt too wide) in paragraph at lines 611--611
+Overfull \hbox (12.90129pt too wide) in paragraph at lines 612--612
 []   \T1/lmtt/m/n/10.95 Working Directory    git add    Staging Area    git com
 mit    Repository[] 
  []
 
 
-Overfull \hbox (7.15256pt too wide) in paragraph at lines 611--611
+Overfull \hbox (7.15256pt too wide) in paragraph at lines 612--612
 []   \T1/lmtt/m/n/10.95 (files)             -------->    (index)         ------
 -->    (commits)[] 
  []
@@ -1153,7 +1153,7 @@ t does not exist, replaced by a fixed one
 share/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/publi
 c/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtk10.pfb></usr/shar
 e/texmf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Tutorial_0_Linux.pdf (25 pages, 273651 bytes).
+Output written on Tutorial_0_Linux.pdf (25 pages, 273719 bytes).
 PDF statistics:
  1033 PDF objects out of 1200 (max. 8388607)
  980 compressed objects within 10 object streams
