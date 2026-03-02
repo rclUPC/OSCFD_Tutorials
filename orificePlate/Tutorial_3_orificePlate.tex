@@ -73,19 +73,23 @@ flow rate in the pipe.
 			\draw[-stealth, ultra thick] (-1.5,0) -- (-0.5,0) node[midway,above] {Flow};
 			
 			% Labels
-			\node at (0.5,1) {Inlet};
-			\node at (7,1) {Outlet};
+			\node at (0.5,-0.5) {Inlet};
+			\node at (7,-0.5) {Outlet};
 			\node at (4.1,1.2) {Orifice};
 			
 			% Dimensions
 			\draw[<->] (8.4,-2) -- node[right] {$D = 20$} (8.4,2);
 			\draw[<->] (4,1) -- node[above right] {$d = 10$} (4,-1);
+			
+			% Reference axis
+			\draw[->] (0,0) -- (1,0) node[above] {$x$};
+			\draw[->] (0,0) -- (0,1) node[left] {$y$};
 		\end{tikzpicture}
 	\end{center}
-	\caption{Orifice plate geometry. Dimensions are in mm.}
+	\caption{Orifice plate geometry section. Dimensions are in mm.}
 \end{figure}
 
-More information can be found on  \hyperlink{https://en.wikipedia.org/wiki/Orifice_plate}{Wikipedia}.
+More information can be found on  \href{https://en.wikipedia.org/wiki/Orifice_plate}{Wikipedia}.
 \subsection{Flow rate measurement}
 
 In the orifice plate flow rate is computed with equation \eqref{eq:FR}
@@ -98,7 +102,7 @@ In the orifice plate flow rate is computed with equation \eqref{eq:FR}
 where $\beta = d/D$,$A_o$ is the area of the orifice, $\rho$ is the density of the fluid
 , $\Delta p$ is the pressure loss in the orifice and $C_d$ is the \textbf{coefficient
 of discharge}. The approximate value of $Cd$ is 0.6, but it can be more precisely
-estimated with the Reader-Harris/Gallagher equation
+estimated with the Reader-Harris/Gallagher equation\cite{readerharris}
 
 \begin{equation}
 	\begin{split}
@@ -119,10 +123,10 @@ where
 The value of $\Delta p$ depends on where the pressure are measured upstream and downstream
 with relation to the orifice. In this case we are going to measure the pressure upstream
 ($p_1$) at a distance $D$ and downstream ($p_2$) at a distance $\frac{D}{2}$.
-According to ISO 5167 standard, for this case $L'_1 = 1$ and $L'_2 = 0.47$. 
+According to ISO 5167 standard\cite{iso5167}, for this case $L'_1 = 1$ and $L'_2 = 0.47$. 
 
 
-\section{Simulation of the flow in the orifice plate}
+\section{Simulation setup}
 \subsection{Case Overview}
 
 \begin{table}[H]
@@ -174,6 +178,674 @@ can be removed
 	# remove the README file
 	rm README
 \end{lstlisting}
+
+
+\subsection{Mesh generation with blockMesh and Python}
+
+The mesh is block-structured with 5 blocks, 2 upstream, 2 downstream and 1 in the orifice.
+Generating this mesh with \terminalcmd{blockMesh} and a 
+dictionary \filename{system/blockMeshDict} by hand can be tedious and prone to errors. 
+Instead, we are going to use the python package
+ \href{https://github.com/takaakiaoki/ofblockmeshdicthelper}{ofblockmeshdicthelper}
+to generate the mesh with a python script. The main advantages of using a python code 
+for the mesh generation are:
+\begin{enumerate}
+	\item It is more \textbf{readable}. Vertexes, blocks, patches... have meaningful names instead of just coordinates and integers indexes.
+	\item It is a \textbf{parametric} design. The entire mesh can be regenerated with the
+	 modification of a geometric feature.
+	\item It is much easier to use python to perform \textbf{complex mathematical computations} for
+	geometry, grading,...
+	\item It is possible to make an \textbf{automated process}. The python code can be adapted to be called with options in the command and it can be included, for instance, in a loop
+	in a bash script, or in another python code. Possibilities are infinity...
+\end{enumerate}
+
+
+For an axisymmetrical simulation, we define a 
+\textbf{wedge} mesh, with and small angle (in this case it will be $\ang{1}$) with respect
+to the XY plane. 
+
+\begin{figure}[H]
+	\begin{center}
+		\begin{tikzpicture}[scale=1, >=stealth]
+			% Simple orifice plate
+			\draw[thick] (0,0)--(0,2)--(8,2)--(8,0);
+			\draw[dash dot] (0,0) -- (8,0);
+			
+			
+			% Plate
+			\draw[pattern=north east lines] (3,1) rectangle (3.5,2);
+			
+			%blocks separations
+			\draw[dashed](0,1)--(3,1);
+			\draw[dashed](3.5,1)--(8,1);
+			\draw[dashed](3,1)--(3,0);
+			\draw[dashed](3.5,1)--(3.5,0);
+			
+			% Labels
+			\node at (1.5,0.5) {\textcolor{blue}{Block 0}};
+			\node at (1.5,1.5) {\textcolor{blue}{Block 1}};
+			\node at (5.5,0.5) {\textcolor{blue}{Block 3}};
+			\node at (5.5,1.5) {\textcolor{blue}{Block 4}};
+			
+			\draw[->, color=blue] (4,-0.5) node[right]  {\textcolor{blue}{Block 2}} -- (3.25,0.5);
+			\draw[->, color=blue] (2,-0.5) node[left]  {\textcolor{blue}{axis}} -- (2.25,0);
+		
+		\end{tikzpicture}
+	\end{center}
+	\caption{Blocks for the orifice plate mesh. }
+\end{figure}
+
+To install the helper, first activate the python environment.
+
+\begin{lstlisting}[style=terminal, caption=Installing \texttt{ofblockmeshdicthelper} and
+	opening the notebook for the orifice plate meshing]
+	# Activate the python evironment (see Tutorial#0, section 5.2)
+	source ~/my_env/bin/activate
+	
+	# Install the package
+	pip install git+https://github.com/rclUPC/ofblockmeshdicthelper.git
+	
+	# Clone the repository for examples
+	git clone https://github.com/rclUPC/ofblockmeshdicthelper.git
+	# Open the example notebook of the orifice plate
+	jupyter lab ofblockmeshdicthelper/examples/OFBlockMeshDictHelper_OrificePlate.ipynb &
+\end{lstlisting}
+
+Remember that the final \texttt{\&} is for passing the process to the background and have
+the terminal available for other commands.
+
+The example note book will open in a \texttt{jupyter lab} session in the web browser
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{jupyterlab}
+	\caption{Screen shot of the jupyter lab session with the orifice plate meshing notebook}
+	\label{fig:jupyterlab}
+\end{figure}
+
+The jupyter notebook is quite self-explanatory. It can be executed cell by cell with
+ \key{Shift-Enter} keys, but in this tutorial we are going to write a python script based 
+on this jupyter notebook. It will make its execution faster and more practical. 
+
+Create a file \filename{generate\_OrificePlate\_mesh.py} with the content of 
+listing \ref{lst:meshGeneration}
+	
+
+\begin{lstlisting}[language=python,keywordstyle=\color{blue}, 
+	caption={Listing of the python script for the generation of the mesh},
+	label={lst:meshGeneration}]
+#!/usr/bin/env python
+# coding: utf-8
+
+import numpy as np
+from ofblockmeshdicthelper import *
+
+
+# Define the geometry and the discretization
+
+wedgeangle = 1
+r = 10
+ro = 5
+l1 = 70
+lo = 2.5
+l2 = 50
+deltax = 0.25
+deltay = 0.25
+Nx1 = int(l1/deltax)
+Nx2 = int(lo/deltax)
+Nx3 = int(l2/deltax)
+Ny1 = int(ro/deltay)
+Ny2 = int((r-ro)/deltay)
+
+# Definition of the dictionary object
+
+bmd = BlockMeshDict()
+
+
+# Define the scale (geometry has been typed in mm)
+md.set_metric('mm')
+
+
+# Define the base vertex (there will be etruded to create the wedge)
+
+basevs = [
+Vertex(0,0,0,'v0'),
+Vertex(l1,0,0,'v1'),
+Vertex(l1+lo,0,0,'v2'),
+Vertex(l1+lo+l2,0,0,'v3'),
+Vertex(l1+lo+l2,ro,0,'v4'),
+Vertex(l1+lo+l2,r,0,'v5'),
+Vertex(l1+lo,r,0,'v6'),
+Vertex(l1+lo,ro,0,'v7'),
+Vertex(l1,ro,0,'v8'),
+Vertex(l1,r,0,'v9'),
+Vertex(0,r,0,'v10'),
+Vertex(0,ro,0,'v11'),
+]
+
+# The extruded wedges are calculated and included in the dictionary
+
+cosd = np.cos(np.radians(wedgeangle))
+sind = np.sin(np.radians(wedgeangle))
+for v in basevs:
+bmd.add_vertex(v.x, v.y*cosd, v.y*sind, v.name+'+z')
+bmd.add_vertex(v.x, v.y*cosd, -v.y*sind, v.name+'-z')
+
+
+# Some of the vertexs are duplicated and then they can be "collapsed" in only one
+
+bmd.reduce_vertex('v0-z','v0+z')
+bmd.reduce_vertex('v1-z','v1+z')
+bmd.reduce_vertex('v2-z','v2+z')
+bmd.reduce_vertex('v3-z','v3+z')
+
+
+# For blocks generation
+def vnamegen(x0y0, x1y0, x1y1, x0y1):
+return (x0y0+'-z', x1y0+'-z', x1y1+'-z', x0y1+'-z',
+x0y0+'+z', x1y0+'+z', x1y1+'+z', x0y1+'+z')
+
+b0 = bmd.add_hexblock(vnamegen('v0', 'v1', 'v8', 'v11'),
+(Nx1, Ny1, 1),
+'b0','fluid',
+grading=SimpleGrading(1,1,1))
+
+b1 = bmd.add_hexblock(vnamegen('v11', 'v8', 'v9', 'v10'),
+(Nx1, Ny2, 1),
+'b1','fluid',
+grading=SimpleGrading(1,1,1))
+
+b2 = bmd.add_hexblock(vnamegen('v1', 'v2', 'v7', 'v8'),
+(Nx2, Ny1, 1),
+'b2','fluid',
+grading=SimpleGrading(1,1,1))
+
+b3 = bmd.add_hexblock(vnamegen('v2', 'v3', 'v4', 'v7'),
+(Nx3, Ny1, 1),
+'b3','fluid',
+grading=SimpleGrading(1,1,1))
+
+b4 = bmd.add_hexblock(vnamegen('v7', 'v4', 'v5', 'v6'),
+(Nx3, Ny2, 1),
+'b4','fluid',
+grading=SimpleGrading(1,1,1))
+
+
+# For boundaries generation
+
+bmd.add_boundary('wedge', 'front',
+[
+b0.face('t'),
+b1.face('t'),
+b2.face('t'),
+b3.face('t'),
+b4.face('t'),
+]
+)
+bmd.add_boundary('wedge', 'back',
+[
+b0.face('b'),
+b1.face('b'),
+b2.face('b'),
+b3.face('b'),
+b4.face('b'),
+]
+)
+bmd.add_boundary('wall', 'wall',
+[
+b1.face('n'),
+b1.face('e'),
+b2.face('n'),
+b4.face('w'),
+b4.face('n'),
+]
+)
+bmd.add_boundary('patch', 'inlet',
+[
+b0.face('w'),
+b1.face('w'),
+]
+)
+bmd.add_boundary('patch', 'outlet',
+[
+b3.face('e'),
+b4.face('e'),
+]
+)
+bmd.add_boundary('empty', 'axis',
+[
+b0.face('s'),
+b2.face('s'),
+b3.face('s'),
+]
+)
+
+
+# Vertex are labelled
+
+bmd.assign_vertexid()
+
+
+# And finally the dictionary is printed and saved to a file
+
+print(bmd.format(),file=open('./system/blockMeshDict','w'))
+
+print('blockMeshDict generated and copied in system folder')
+\end{lstlisting}
+
+Now the mesh can be generated with this new \filename{system/blockMeshDict}
+
+\begin{lstlisting}[style=terminal]
+	foamJob -log-app blockMesh
+\end{lstlisting}
+
+and the mesh can be check with \terminalcmd{paraFoam}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=1\linewidth]{mesh}
+	\caption{Orifice plate mesh}
+	\label{fig:mesh}
+\end{figure}
+
+
+\subsection{Boundary conditions and fluid properties}
+
+\subsubsection{Velocity}
+
+Check the initial condition and boundary condition for velocity
+
+\begin{lstlisting}[style=terminal]
+	cat 0/U
+\end{lstlisting}
+
+The output will be this:
+
+\begin{lstlisting}[style=output]
+	... 
+	
+	Uinlet          (10 0 0);
+	
+	dimensions      [0 1 -1 0 0 0 0];
+	
+	internalField   uniform (0 0 0);
+	
+	boundaryField
+	{
+		inlet
+		{
+			type            fixedValue;
+			value           uniform $Uinlet;
+		}
+		
+		outlet
+		{
+			type            pressureInletOutletVelocity;
+			value           uniform (0 0 0);
+		}
+		
+		wall
+		{
+			type            noSlip;
+		}
+		
+		#includeEtc "caseDicts/setConstraintTypes"
+	}
+\end{lstlisting}
+
+Some notes on this file: 
+
+\begin{enumerate}
+	\item The value of velocity is defined as a variable \texttt{Uinlet} at the beginning of the file and then it is used in the dictionary with \texttt{\$Uinlet}.
+	\item $\qty{10}{m/s}$ is huge for our case of water. \textbf{Change it to $\qty{1}{m/s}$}. 
+	\item \texttt{pressureInletOutletVelocity} boundary condition for outlet is an special case where the pressure is specified. It is as zero-gradient fo outflow and with the velocity in the internal cell for inflow (reversed flow).
+	\item \texttt{\#includeEtc "caseDicts/setConstraintTypes"} is a macro expansion that includes all the possible constraints. In this case it is useful because it avoids us
+	to explicitly define the wedge patches.
+\end{enumerate}
+
+\subsubsection{Pressure}
+
+The pressure file, \filename{0/p}, is OK: zero gradient in inlet and fixed value of
+\qty{0}{m^2/s^2} at the outlet
+
+\begin{lstlisting}[style=openfoam]
+	dimensions      [0 2 -2 0 0 0 0];
+	
+	internalField   uniform 0;
+	
+	boundaryField
+	{
+	inlet
+	{
+	type            zeroGradient;
+	}
+	
+	outlet
+	{
+	type            fixedValue;
+	value           uniform 0;
+	}
+	
+	wall
+	{
+	type            zeroGradient;
+	}
+	
+	#includeEtc ``caseDicts/setConstraintTypes''
+	}
+	
+\end{lstlisting}
+
+\subsubsection{Turbulent variables}
+
+This simulation will be made with $k-\omega$ SST turbulence model. Two variables, $k$
+and $\omega$ have to be setup as boundary conditions in inlet, outlet and walls.
+
+The \filename{0/k} file has to be this one:
+
+\begin{lstlisting}[style=openfoam]
+	kInlet          0.00375;
+	
+	dimensions      [0 2 -2 0 0 0 0];
+	
+	internalField   uniform $kInlet;
+	
+	boundaryField
+	{
+	inlet
+	{
+	type            turbulentIntensityKineticEnergyInlet;
+	intensity       0.05;
+	value           uniform \$kInlet;
+	}
+	
+	outlet
+	{
+	type            inletOutlet;
+	inletValue      uniform \$kInlet;
+	value           uniform \$kInlet;
+	}
+	
+	wall
+	{
+	type            kqRWallFunction;
+	value           uniform \$kInlet;
+	}
+	
+	#includeEtc ``caseDicts/setConstraintTypes''
+	}
+	
+\end{lstlisting}
+
+and this for \filename{0/omega}:
+
+\begin{lstlisting}[style=openfoam]
+	omegaInlet      80.0;
+	
+	dimensions      [0 0 -1 0 0 0 0];
+	
+	internalField   uniform $omegaInlet;
+	
+	boundaryField
+	{
+		inlet
+		{
+			type            turbulentMixingLengthFrequencyInlet;
+			mixingLength    0.0014;
+			value           uniform $omegaInlet;
+		}
+		
+		outlet
+		{
+			type            inletOutlet;
+			inletValue      uniform $omegaInlet;
+			value           uniform $omegaInlet;
+		}
+		
+		wall
+		{
+			type            omegaWallFunction;
+			value           uniform $omegaInlet;
+		}
+		
+		#includeEtc "caseDicts/setConstraintTypes"
+	}
+\end{lstlisting}
+
+According to this boundary conditions, values of $k$, kinetic turbulence energy, and 
+$\omega$, turbulent specific dissipation rate, are computed with
+
+\begin{equation}
+	k = \frac{3}{2} \left(\|U\| I\right)^2
+\end{equation}
+and
+\begin{equation}
+	\omega = \frac{k^\frac{1}{2}}{C_\mu^\frac{1}{4}L}
+\end{equation}
+where $I=0.05$ is the turbulence intensity, $U$ is the average velocity of the flow, 
+$C_\mu = 0.09$ and $L=0.07D$, being $D$ the diameter of the pipe, is the 
+turbulence mixing length. 
+
+\subsection{Viscosity of fluid}
+
+Since the fluid in this simulation will be water, we have to change the  kinematic 
+viscosity in \filename{constant/transportProperties}
+
+\begin{lstlisting}[style=openfoam]
+	transportModel  Newtonian;
+	
+	nu              [0 2 -1 0 0 0 0] 1e-06;
+\end{lstlisting}
+\section{Running the simulation}
+
+\subsection{Case preparation. Monitoring simulation}
+
+To monitor residuals and convergence of the simulation we are going to use the 
+\terminalcmd{solverInfo} function provided by openfoam. 
+
+Get this dictionary from the openfoam distribution
+\begin{lstlisting}[style=terminal]
+	foamGetDictionary solverInfo
+\end{lstlisting}
+and edit it to include the variables $k$ and $\omega$.
+
+\begin{lstlisting}[style=openfoam, caption={\filename{system/solverInfo} file.}]
+	#includeEtc "caseDicts/postProcessing/numerical/solverInfo.cfg"
+	
+	fields (p U k omega);
+\end{lstlisting}
+
+Include this function in the \filename{system/controlDict} file
+
+\begin{lstlisting}[style=openfoam, caption={\texttt{fuctions} subdictionary of 
+		\filename{system/controlDict} file.}]
+...
+
+functions
+{
+	#includeFunc    solverInfo
+}
+\end{lstlisting}
+
+By default, the simulation is set up to finish when residuals reach the value $\num{e4}$.
+We modify it to consider that it has converged fo $\num{e3}$, by editing the file
+\filename{system/fvSolution}
+
+\begin{lstlisting}[style=openfoam, caption={\texttt{SIMPLE} subdictionary of 
+		\filename{system/fvSolution} file to control simulation convergence criteria.}]
+...
+	
+SIMPLE
+{
+	residualControl
+	{
+		p               1e-3;
+		U               1e-3;
+		"(k|omega|epsilon)" 1e-3;
+	}
+	nNonOrthogonalCorrectors 0;
+	pRefCell        0;
+	pRefValue       0;
+	
+}
+
+...
+\end{lstlisting}
+
+\subsection{Solver execution}
+
+\begin{lstlisting}[style=terminal]
+foamJob -log-app simpleFoam
+\end{lstlisting}
+
+\subsection{Monitoring convergence}
+
+We can plot the residuals with the command
+
+\begin{lstlisting}[style=terminal]
+foamMonitor -l postProcessing/solverInfo/0/solverInfo.dat
+\end{lstlisting}
+
+The option \texttt{-l} plots the vertical axis with logarithmic scale. 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{residuals}
+	\caption{Residuals of simulation}
+	\label{fig:residuals}
+\end{figure}
+
+
+\section{Results and Validation}
+
+In paraview, with command \terminalcmd{paraFoam}. visualize the last time step 
+(converged solution)
+
+\subsection{Pressure field visualization}
+
+The expansion for the whole pipe diameter can be done with \texttt{Filter $\rightarrow$ Alphabetical $\rightarrow$ Reflect} 
+with respect to the plane \texttt{Y Min}.
+Note the pressure drop in the orifice plate
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{pressure}
+	\caption{Pressure contours}
+	\label{fig:pressure}
+\end{figure}
+
+\subsection{Velocity field}
+
+The vena contracta is shown the velocity contoours.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{velocity}
+	\caption{Velocity contour}
+	\label{fig:velocity}
+\end{figure}
+
+The streamlines shown in Figure \ref{fig:stramlines} are generated with filters:
+\begin{enumerate}
+	\item \texttt{StreamTracer} with a vertical line located in $x=\qty{0.09}{m}$ with
+	a resolution of 50 points.
+	\item \texttt{Tube} filter with a radius of \qty{0.2}{mm}.
+\end{enumerate}
+
+The reatachment point is very close to the outlet patch. That suggest that downstream 
+region should be longer. 
+ 
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{streamLines}
+	\caption{Streamlines of flow.}
+	\label{fig:stramlines}
+	\label{fig:streamlines}
+\end{figure}
+
+\subsection{Coefficient of discharge calculation}
+
+Following equation \eqref{eq:FR}, the discharge coefficient is computed as
+
+\begin{equation}
+	\label{eq:Cd}
+	C_d = \frac{Q {\sqrt{1-\beta^4}}}{A_o}\sqrt{\frac{\rho}{2\Delta p}}
+\end{equation}
+to computationally compute $\Delta p$, let's plot the pressure distribution along the wall.
+We use the \texttt{Plot Over Line} with a line parallel to $x$ axis, but located at $y=\qty{0.0095}{mm}$\footnote{A line just in the wall, in $y=\qty{0.01}{m}$, wouldn't give any value because of the tolerance of the mesh. We measure the pressure $\qty{0.5}{mm}$
+inside the domain.}. These data can be exported to a \filename{csv} file with
+\texttt{File $\rightarrow$ Save Data} and processed with any program.
+
+The upstream pressure has to be measured at a distance $D$ of the orifice, that is,
+$x_1 = \qty{50}{mm}$, and downstream has to be at a distance $\frac{D}{2}$, 
+$x_2 = \qty{82.5}{mm}$ 
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.7\linewidth]{pressurePlot}
+	\caption{Pressure plot}
+	\label{fig:pressureplot}
+\end{figure}
+
+This measurements can be processed with a jupyter notebook in order to compute $C_d$ and 
+validate it with the result from Reader-Harris-Gallagher equation. This can be done with
+the package \texttt{fluids}\cite{bell2025}
+
+An example of such a jupyter notebook is show in Figure \ref{fig:validation}.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=\linewidth]{validation}
+	\caption{Jupyter Notebook for discharge coefficient computation and validation with experimental data.}
+	\label{fig:validation}
+\end{figure}
+
+\section{Exercises}
+
+\subsection{Modify beta ratio}
+
+Repeat the simulation with a different value of $\beta$ by variation of the orifice diameter. It can be smaller than 0.5, $\beta=0.4$, or bigger, $\beta = 0.6$, 
+$\beta = 0.75$,...
+
+Compare the outcome with the result from Reader-HArris-Gallagher equation.
+
+\subsection{Modify Reynolds}
+
+Repeat the simulation with a smaller value of Reynolds. It can be done either by modifying
+the inlet velocity, the pipe diameter or the viscosity. Remember to modify also
+turbulent variables according to this new configuration. Use "flanged taps" configuration
+for pressure measurement and compare with results from the publication by 
+Manish et al.\cite{Manish2012}, where $Re_D$ ranges from 4500 to 9000.
+
+
+\begin{thebibliography}{9}
+	
+	\bibitem{readerharris}
+	Reader-Harris, M. J. (2015). 
+	\textit{Orifice Plates and Venturi Tubes}. 
+	Springer International Publishing.
+	
+	\bibitem{iso5167}
+	ISO 5167-1:2022. 
+	\textit{Measurement of fluid flow by means of pressure differential devices}. 
+	International Organization for Standardization, Geneva, Switzerland.
+	
+	\bibitem{bell2025}
+	Caleb Bell and Contributors (2016-2025). \textit{fluids: Fluid dynamics component of Chemical Engineering Design Library (ChEDL)}
+	\url{https://github.com/CalebBell/fluids.}
+	\url{https://fluids.readthedocs.io/fluids.flow_meter.html#orifice-plate-correlations}
+	
+	\bibitem{Manish2012}
+	Manish S. Shah, Jyeshtharaj B. Joshi, Avtar S. Kalsi, C.S.R. Prasad, Daya S. Shukla,
+	\textit{Analysis of flow through an orifice meter: CFD simulation},
+	Chemical Engineering Science,
+	Volume 71,
+	2012,
+	Pages 300-309,
+	ISSN 0009-2509,
+	https://doi.org/10.1016/j.ces.2011.11.022.
+	\url{https://www.sciencedirect.com/science/article/pii/S0009250911008219}
+\end{thebibliography}
 
 \input{../disclaimer.tex}
 

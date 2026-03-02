@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.28)  25 FEB 2026 20:57
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.28)  2 MAR 2026 20:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -841,15 +841,27 @@ Package caption Info: KOMA-Script scrextend package detected.
 \caption@addmargin@hsize=\dimen303
 \caption@addmargin@linewidth=\dimen304
 )
+(/usr/share/texlive/texmf-dist/tex/generic/ulem/ulem.sty
+\UL@box=\box79
+\UL@hyphenbox=\box80
+\UL@skip=\skip71
+\UL@hook=\toks42
+\UL@height=\dimen305
+\UL@pe=\count340
+\UL@pixel=\dimen306
+\ULC@box=\box81
+Package: ulem 2019/11/18
+\ULdepth=\dimen307
+)
 (/usr/share/texlive/texmf-dist/tex/generic/babel/babel.sty
 Package: babel 2024/01/07 v24.1 The Babel package
-\babel@savecnt=\count340
-\U@D=\dimen305
+\babel@savecnt=\count341
+\U@D=\dimen308
 \l@unhyphenated=\language12
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel/txtbabel.def)
 \bbl@readstream=\read3
-\bbl@dirlevel=\count341
+\bbl@dirlevel=\count342
 
 (/usr/share/texlive/texmf-dist/tex/generic/babel-english/english.ldf
 Language: english 2017/06/06 v3.3r English support from the babel system
@@ -870,13 +882,13 @@ Package babel Info: Importing font and identification data for english
 )
 (/usr/share/texlive/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count342
-\float@exts=\toks42
-\float@box=\box79
-\@float@everytoks=\toks43
-\@floatcapt=\box80
+\c@float@type=\count343
+\float@exts=\toks43
+\float@box=\box82
+\@float@everytoks=\toks44
+\@floatcapt=\box83
 )
-Package hyperref Info: Option `colorlinks' set `true' on input line 72.
+Package hyperref Info: Option `colorlinks' set `true' on input line 73.
 )
 (/usr/share/texlive/texmf-dist/tex/generic/pgf/frontendlayer/tikz/libraries/tik
 zlibrarypatterns.code.tex
@@ -893,8 +905,8 @@ File: t1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
 (/usr/share/texlive/texmf-dist/tex/latex/l3backend/l3backend-pdftex.def
 File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
-\l__color_backend_stack_int=\count343
-\l__pdf_internal_box=\box81
+\l__color_backend_stack_int=\count344
+\l__pdf_internal_box=\box84
 )
 (./Tutorial_3_orificePlate.aux)
 \openout1 = `Tutorial_3_orificePlate.aux'.
@@ -963,17 +975,17 @@ Package scrbase Info: activating english \indexname on input line 18.
 
 (/usr/share/texlive/texmf-dist/tex/context/base/mkii/supp-pdf.mkii
 [Loading MPS to PDF converter (version 2006.09.02).]
-\scratchcounter=\count344
-\scratchdimen=\dimen306
-\scratchbox=\box82
-\nofMPsegments=\count345
-\nofMParguments=\count346
-\everyMPshowfont=\toks44
-\MPscratchCnt=\count347
-\MPscratchDim=\dimen307
-\MPnumerator=\count348
-\makeMPintoPDFobject=\count349
-\everyMPtoPDFconversion=\toks45
+\scratchcounter=\count345
+\scratchdimen=\dimen309
+\scratchbox=\box85
+\nofMPsegments=\count346
+\nofMParguments=\count347
+\everyMPshowfont=\toks45
+\MPscratchCnt=\count348
+\MPscratchDim=\dimen310
+\MPnumerator=\count349
+\makeMPintoPDFobject=\count350
+\everyMPtoPDFconversion=\toks46
 ) (/usr/share/texlive/texmf-dist/tex/latex/epstopdf-pkg/epstopdf-base.sty
 Package: epstopdf-base 2020-01-24 v2.11 Base part for package epstopdf
 Package epstopdf-base Info: Redefining graphics rule for `.eps' on input line 4
@@ -1004,7 +1016,7 @@ Package microtype Info: No adjustment of character kerning.
 File: mt-cmr.cfg 2013/05/19 v2.2 microtype config. file: Computer Modern Roman 
 (RS)
 )
-\c@lstlisting=\count350
+\c@lstlisting=\count351
 
 (/usr/share/texlive/texmf-dist/tex/latex/translations/translations-basic-dictio
 nary-english.trsl
@@ -1034,7 +1046,7 @@ Package: bookmark 2023-12-10 v1.31 PDF bookmarks (HO)
 (/usr/share/texlive/texmf-dist/tex/latex/bookmark/bkm-pdftex.def
 File: bkm-pdftex.def 2023-12-10 v1.31 bookmark driver for pdfTeX and luaTeX (HO
 )
-\BKM@id=\count351
+\BKM@id=\count352
 ))
 Package caption Info: Begin \AtBeginDocument code.
 Package caption Info: float package is loaded.
@@ -1118,8 +1130,98 @@ dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}])
 
 [2] [3{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/share/texmf/font
 s/enc/dvips/lm/lm-rm.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathex.enc}{/u
-sr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}] [4] (../disclaimer.tex)
-[5] (./Tutorial_3_orificePlate.aux)
+sr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc}] [4] [5]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 241.
+<jupyterlab.png, id=123, 1686.3pt x 1053.9375pt>
+File: jupyterlab.png Graphic file (type png)
+<use jupyterlab.png>
+Package pdftex.def Info: jupyterlab.png  used on input line 261.
+(pdftex.def)             Requested size: 418.25372pt x 261.40918pt.
+ [6]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+) [7 <./jupyterlab.png (PNG copy)>] [8] [9] [10]
+<mesh.png, id=322, 1264.725pt x 790.45313pt>
+File: mesh.png Graphic file (type png)
+<use mesh.png>
+Package pdftex.def Info: mesh.png  used on input line 446.
+(pdftex.def)             Requested size: 418.25372pt x 261.40515pt.
+ [11 <./mesh.png (PNG copy)>]
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstlang1.sty
+File: lstlang1.sty 2023/02/27 1.9 listings language file
+)
+(/usr/share/texlive/texmf-dist/tex/latex/listings/lstmisc.sty
+File: lstmisc.sty 2023/02/27 1.9 (Carsten Heinz)
+) [12] [13]
+[14] [15]
+<residuals.png, id=489, 931.22906pt x 521.69907pt>
+File: residuals.png Graphic file (type png)
+<use residuals.png>
+Package pdftex.def Info: residuals.png  used on input line 713.
+(pdftex.def)             Requested size: 292.77632pt x 164.01765pt.
+ [16]
+<pressure.png, id=517, 1356.06625pt x 678.535pt>
+File: pressure.png Graphic file (type png)
+<use pressure.png>
+Package pdftex.def Info: pressure.png  used on input line 732.
+(pdftex.def)             Requested size: 418.25372pt x 209.27725pt.
+<velocity.png, id=518, 1356.06625pt x 678.535pt>
+File: velocity.png Graphic file (type png)
+<use velocity.png>
+Package pdftex.def Info: velocity.png  used on input line 743.
+(pdftex.def)             Requested size: 418.25372pt x 209.27725pt.
+ [17 <./residuals.png> <./pressure.png>]
+<streamLines.png, id=528, 1017.04968pt x 508.90125pt>
+File: streamLines.png Graphic file (type png)
+<use streamLines.png>
+Package pdftex.def Info: streamLines.png  used on input line 760.
+(pdftex.def)             Requested size: 418.25372pt x 209.27985pt.
+ [18 <./velocity.png>]
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <9> on input line 776.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <5> on input line 776.
+<pressurePlot.png, id=540, 513.41812pt x 581.92406pt>
+File: pressurePlot.png Graphic file (type png)
+<use pressurePlot.png>
+Package pdftex.def Info: pressurePlot.png  used on input line 785.
+(pdftex.def)             Requested size: 292.77632pt x 331.84222pt.
+
+[19 <./streamLines.png>]
+<validation.png, id=556, 632.3625pt x 563.10374pt>
+File: validation.png Graphic file (type png)
+<use validation.png>
+Package pdftex.def Info: validation.png  used on input line 798.
+(pdftex.def)             Requested size: 418.25372pt x 372.4487pt.
+ [20 <./pressurePlot.png>] [21 <./validation.png>]
+Underfull \hbox (badness 5374) in paragraph at lines 834--837
+[]\T1/lmr/m/n/10.95 (+20) Caleb Bell and Con-trib-u-tors (2016-2025). \T1/lmr/m
+/it/10.95 (+20) flu-ids: Fluid dy-nam-ics com-
+ []
+
+
+Underfull \hbox (badness 2237) in paragraph at lines 834--837
+\T1/lmr/m/it/10.95 (+20) po-nent of Chem-i-cal En-gi-neer-ing De-sign Li-brary 
+(ChEDL) [][]$\T1/lmtt/m/n/10.95 https : / / github .
+ []
+
+
+Underfull \hbox (badness 1968) in paragraph at lines 834--837
+\T1/lmtt/m/n/10.95 com / CalebBell / fluids.$[][] [][]$https : / / fluids . rea
+dthedocs . io / fluids . flow _ meter .
+ []
+
+
+Underfull \hbox (badness 3260) in paragraph at lines 839--848
+\T1/lmr/m/n/10.95 (+20) S. Shukla, \T1/lmr/m/it/10.95 (+20) Anal-y-sis of flow 
+through an ori-fice me-ter: CFD sim-u-la-tion\T1/lmr/m/n/10.95 (+20) ,
+ []
+
+(../disclaimer.tex) [22] (./Tutorial_3_orificePlate.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1129,30 +1231,29 @@ Package rerunfilecheck Info: File `Tutorial_3_orificePlate.out' has not changed
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 33656 strings out of 476047
- 682252 string characters out of 5792075
- 1994975 words of memory out of 5000000
- 55089 multiletter control sequences out of 15000+600000
- 614735 words of font info for 110 fonts, out of 8000000 for 9000
+ 34811 strings out of 476047
+ 698387 string characters out of 5792075
+ 2257975 words of memory out of 5000000
+ 55777 multiletter control sequences out of 15000+600000
+ 634972 words of font info for 148 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 115i,16n,110p,10918b,1124s stack positions out of 10000i,1000n,20000p,200000b,200000s
-
-pdfTeX warning (dest): name{https://en.wikipedia.org/wiki/Orifice_plate} has be
-en referenced but does not exist, replaced by a fixed one
-
-</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/type
-1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></usr
-/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/pub
-lic/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/
-texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/l
-mr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/font
-s/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.p
-fb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/ty
-pe1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb>
-Output written on Tutorial_3_orificePlate.pdf (5 pages, 271937 bytes).
+ 115i,16n,110p,10918b,2661s stack positions out of 10000i,1000n,20000p,200000b,200000s
+</usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
+pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmex10.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></usr/share/texmf/fonts/type1/p
+ublic/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi9.pfb></usr/shar
+e/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/public/lm
+/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr6.pfb></usr/share/texmf/f
+onts/type1/public/lm/lmr8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr9.pfb>
+</usr/share/texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type
+1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></u
+sr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/sha
+re/texmf/fonts/type1/public/lm/lmtti10.pfb>
+Output written on Tutorial_3_orificePlate.pdf (22 pages, 1992702 bytes).
 PDF statistics:
- 178 PDF objects out of 1000 (max. 8388607)
- 138 compressed objects within 2 object streams
- 34 named destinations out of 1000 (max. 500000)
- 36417 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 836 PDF objects out of 1000 (max. 8388607)
+ 748 compressed objects within 8 object streams
+ 424 named destinations out of 1000 (max. 500000)
+ 47345 words of extra memory for PDF output out of 51595 (max. 10000000)
 

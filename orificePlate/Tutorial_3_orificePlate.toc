@@ -2,7 +2,24 @@
 \contentsline {section}{\numberline {1}Introduction and Theoretical Background}{3}{section.1}%
 \contentsline {subsection}{\numberline {1.1}What is an orifice plate?}{3}{subsection.1.1}%
 \contentsline {subsection}{\numberline {1.2}Flow rate measurement}{3}{subsection.1.2}%
-\contentsline {section}{\numberline {2}Simulation of the flow in the orifice plate}{4}{section.2}%
+\contentsline {section}{\numberline {2}Simulation setup}{4}{section.2}%
 \contentsline {subsection}{\numberline {2.1}Case Overview}{4}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}Case copy}{5}{subsection.2.2}%
+\contentsline {subsection}{\numberline {2.3}Mesh generation with blockMesh and Python}{5}{subsection.2.3}%
+\contentsline {subsection}{\numberline {2.4}Boundary conditions and fluid properties}{11}{subsection.2.4}%
+\contentsline {subsubsection}{\numberline {2.4.1}Velocity}{11}{subsubsection.2.4.1}%
+\contentsline {subsubsection}{\numberline {2.4.2}Pressure}{12}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.3}Turbulent variables}{13}{subsubsection.2.4.3}%
+\contentsline {subsection}{\numberline {2.5}Viscosity of fluid}{15}{subsection.2.5}%
+\contentsline {section}{\numberline {3}Running the simulation}{15}{section.3}%
+\contentsline {subsection}{\numberline {3.1}Case preparation. Monitoring simulation}{15}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}Solver execution}{16}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}Monitoring convergence}{16}{subsection.3.3}%
+\contentsline {section}{\numberline {4}Results and Validation}{17}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Pressure field visualization}{17}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Velocity field}{18}{subsection.4.2}%
+\contentsline {subsection}{\numberline {4.3}Coefficient of discharge calculation}{19}{subsection.4.3}%
+\contentsline {section}{\numberline {5}Exercises}{21}{section.5}%
+\contentsline {subsection}{\numberline {5.1}Modify beta ratio}{21}{subsection.5.1}%
+\contentsline {subsection}{\numberline {5.2}Modify Reynolds}{22}{subsection.5.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
