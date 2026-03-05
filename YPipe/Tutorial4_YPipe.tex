@@ -1,0 +1,154 @@
+% ==============================================
+% CFD Tutorial Template: OpenFOAM Terminal Basics
+% Class: scrartcl (KOMA-Script) - optimized for tutorials
+% Content: pitzDaily with simpleFoam
+% ==============================================
+
+\documentclass[
+parskip=half,      % Space between paragraphs (better for steps)
+DIV=12,            % Optimal margins for readability
+headings=normal,   % Professional heading sizes
+fontsize=11pt,     % Slightly larger for screen reading
+english            % Language setting
+]{scrartcl}
+
+\input{../preamble.tex}
+\usetikzlibrary{intersections}
+
+% ========== DOCUMENT START ==========
+\begin{document}
+	
+	% ========== TITLE PAGE ==========
+	\title{Tutorial \#4: 3D Y-Pipe}
+	\subtitle{Incompressible Steady Flow: 3D Y-Pipe with simpleFOAM}
+	\subject{Open Source CFD }
+	\author{Robert Castilla \\ Department of Fluid Mechanics}
+	\date{2025-26 \\ Version 1.0}
+	\publishers{Learning Objectives:
+		\begin{itemize}
+			\item Create a complex 3D geometry with sketch and additive pipe with FreeCAD
+			\item Generate high quality STL surface
+			\item Mesh a 3D geometry with \texttt{snappyHexMesh}
+			\item Setup a case with multiple inlets
+			\item Analyze flow and pressure drop
+			\item Visualize 3D results with \texttt{paraview}
+	\end{itemize}}
+	
+	\maketitle
+	
+	% ========== ABSTRACT ==========
+	\begin{abstract}
+		This tutorial introduces the fundamental workflow of Computational Fluid Dynamics (CFD) for a 3D geometry. We simulate the flow in a Y-shaped pipe junction. You will create the 3D geometry with FreeCAD, generate a high-quality STL file, mesh the geomatry, run the steady simulation and, finally, post-process the results.
+	\end{abstract}
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Introduction}
+	
+	The Y-pipe consists of:
+	\begin{itemize}
+		\item Main pipe: 250 mm long, 100 mm diameter
+		\item Secondary branch: 500 mm long branch at 90°, 100 mm diameter
+		\item Inlet branch: 250 mm long, 50 mm diameter
+	\end{itemize}
+	
+	An scheme of the Y-pipe is shown in Figure \ref{fig:ypipe}
+	\begin{figure}[h]
+		\centering
+		\begin{tikzpicture}[>=stealth,scale=1.5]
+			\draw[->] (0,0) --++(5,0) node[below]{$x$};
+			\draw[->] (0,0) --++(0,5) node[left]{$y$};
+			\draw[dashdotted] (0,0) --++(2.5,0) arc [start angle=-90,end angle=0,x radius=1,y radius=1]
+			--++(0,5);
+			\draw[dashdotted] (3.5,-2.5) --++(0,3.5);
+			% Main pipe (horizontal)
+			\draw[thick] (0,0) ellipse (0.2 and 0.5);
+			\draw[thick, name path = arc] (0,-.5) --++ (2.5,0) arc [start angle=-90,end angle=0,x radius=1.5,y radius=1.5] 
+			--++(0,5);
+			\draw[thick] (0,0.5) --++(2.5,0) arc [start angle=-90,end angle=0,x radius=0.5,y radius=0.5]
+			--++(0,5);
+			\draw[thick] (3.5,6) ellipse (0.5 and 0.2);
+			
+			% Secondary inlet 
+			\path[name path = line1] (3.25,-2.5) --++(0,5);
+			\path[name path = line2] (3.75,-2.5) --++(0,5);
+			\path [name intersections={of=arc and line1, by=intersect1}];
+			\path [name intersections={of=arc and line2, by=intersect2}];
+			\draw[thick] (3.5,-2.5) ellipse (0.25 and 0.1);
+			\draw[thick] (3.25,-2.5) -- (intersect1)  ;
+			\draw[thick] (3.75,-2.5) -- (intersect2)  ;
+			% Labels
+			\node at (-0.2,0)[left] {Main inlet};
+			\node at (3.5,-3) {Secondary inlet};
+			\node at (3.5,6.5) {Outlet};
+			% dimensions
+			\draw[<->](0,-0.7)--++(2.5,0) node[midway, below]{250 mm};
+			\draw[<->](4.5,1)--++(0,5) node[midway, right]{500 mm};
+			\draw[<->](4,-2.5)--++(0,2.5) node[midway, right]{250 mm};
+			\draw[<->](1,-0.5) --++ (0,1) node[below right] {100 mm};
+			\draw[<->](3.75,-2) --++ (-0.5,0) node[left] {50 mm};
+			\draw[->](2.5,1) --++ (-45:1) node[midway, left] {100 mm};
+			
+		\end{tikzpicture}
+		\caption{Y-pipe geometry schematic}
+		\label{fig:ypipe}
+	\end{figure}
+	
+	\section{Generation of the geometry}
+	
+	First, open a new \texttt{Part design} and an sketch in the XY plane. Draw the center
+	line of the main pipe and the branch. It is composed of an horizontal line of 
+	\qty{250}{mm} long, an arc of radius \qty{100}{mm} and a vertical line \qty{500}{mm}
+	long. Don't worry about the dimensions and tangent lines when drawing the sketch, they 
+	can define later. When the sketch is completely defined, it becomes green, 
+	and it can be closed.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{sketch}
+		\caption{First sketch.}
+		\label{fig:sketch}
+	\end{figure}
+	
+	Draw another sketch, with just a circle of radius \qty{50}{mm}, in the YZ plane
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{sketch1}
+		\caption{Sketch for 100 mm circle in YZ plane}
+		\label{fig:sketch1}
+	\end{figure}
+	
+	Select both sketches and make an \texttt{Additive pipe}. The result should be like in 
+	Figure \ref{fig:pipe1}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{pipe1}
+		\caption{First main pipe}
+		\label{fig:pipe1}
+	\end{figure}
+	
+	Let's now make the secondary branch. Create another sketch, but in the \texttt{outlet}
+	face, with a \qty{50}{mm} diameter circle, with center
+	 coincident to $x$ axis, and  \qty{350}{mm} away from $z$ axis (see Figure 
+	 \ref{fig:sketch2})
+	 
+	 \begin{figure}[h]
+	 	\centering
+	 	\includegraphics[width=0.7\linewidth]{sketch2}
+	 	\caption{Circle in outlet face.}
+	 	\label{fig:sketch2}
+	 \end{figure}
+	 
+	 Make a \texttt{Pad} of \qty{800}{mm} with this circle with reversed direction, and the geometry is finished. \textbf{Don't forget to save the work!}. Save it with the name \texttt{Ypipe} in a \filename{Tutorial4} folder.
+	 
+	 \begin{figure}[h]
+	 	\centering
+	 	\includegraphics[width=0.7\linewidth]{pipe2}
+	 	\caption{Y-pipe geometry.}
+	 	\label{fig:pipe2}
+	 \end{figure}
+	 
+\end{document}
