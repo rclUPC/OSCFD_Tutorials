@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2025.8.28)  5 MAR 2026 23:17
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.7)  9 MAR 2026 22:56
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1108,59 +1108,158 @@ Package microtype Info: Loading generic protrusion settings for font family
 (microtype)             See the microtype manual for details.
 Package tocbasic Info: character protrusion at toc deactivated on input line 44
 .
- (./Tutorial4_YPipe.toc)
-\tf@toc=\write5
-\openout5 = `Tutorial4_YPipe.toc'.
-
+ (./Tutorial4_YPipe.toc
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <10.95> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <8> on input line 4.
+LaTeX Font Info:    External font `lmex10' loaded for size
+(Font)              <6> on input line 4.
  [1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
-dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}]
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <10.95> on input line 60.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <8> on input line 60.
-LaTeX Font Info:    External font `lmex10' loaded for size
-(Font)              <6> on input line 60.
- [2{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}]
-<sketch.png, id=31, 1264.725pt x 790.45313pt>
+dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}])
+\tf@toc=\write5
+\openout5 = `Tutorial4_YPipe.toc'.
+
+ [2] [3{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}]
+<sketch.png, id=68, 1264.725pt x 790.45313pt>
 File: sketch.png Graphic file (type png)
 <use sketch.png>
-Package pdftex.def Info: sketch.png  used on input line 109.
+Package pdftex.def Info: sketch.png  used on input line 111.
 (pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-<sketch1.png, id=32, 1264.725pt x 790.45313pt>
+<sketch1.png, id=69, 1264.725pt x 790.45313pt>
 File: sketch1.png Graphic file (type png)
 <use sketch1.png>
-Package pdftex.def Info: sketch1.png  used on input line 118.
+Package pdftex.def Info: sketch1.png  used on input line 120.
 (pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-<pipe1.png, id=34, 1264.725pt x 790.45313pt>
+ [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} <./sketch.png (PNG copy)> <.
+/sketch1.png (PNG copy)>]
+<pipe1.png, id=78, 1264.725pt x 790.45313pt>
 File: pipe1.png Graphic file (type png)
 <use pipe1.png>
-Package pdftex.def Info: pipe1.png  used on input line 128.
+Package pdftex.def Info: pipe1.png  used on input line 130.
 (pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[3{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} <./sketch.png (PNG copy)> <./
-sketch1.png (PNG copy)>]
-<sketch2.png, id=45, 1264.725pt x 790.45313pt>
+<sketch2.png, id=80, 1264.725pt x 790.45313pt>
 File: sketch2.png Graphic file (type png)
 <use sketch2.png>
-Package pdftex.def Info: sketch2.png  used on input line 140.
+Package pdftex.def Info: sketch2.png  used on input line 142.
 (pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-<pipe2.png, id=46, 1264.725pt x 790.45313pt>
+<pipe2.png, id=81, 1264.725pt x 790.45313pt>
 File: pipe2.png Graphic file (type png)
 <use pipe2.png>
-Package pdftex.def Info: pipe2.png  used on input line 149.
+Package pdftex.def Info: pipe2.png  used on input line 151.
 (pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[4 <./pipe1.png (PNG copy)> <./sketch2.png (PNG copy)>] [5 <./pipe2.png (PNG co
-py)>] (./Tutorial4_YPipe.aux)
+[5 <./pipe1.png (PNG copy)> <./sketch2.png (PNG copy)>]
+<explode1.png, id=92, 1265.47781pt x 550.30594pt>
+File: explode1.png Graphic file (type png)
+<use explode1.png>
+Package pdftex.def Info: explode1.png  used on input line 170.
+(pdftex.def)             Requested size: 292.77632pt x 127.31503pt.
+<explode2.png, id=93, 1099.10625pt x 529.22719pt>
+File: explode2.png Graphic file (type png)
+<use explode2.png>
+Package pdftex.def Info: explode2.png  used on input line 181.
+(pdftex.def)             Requested size: 292.77632pt x 140.97131pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[6 <./pipe2.png (PNG copy)> <./explode1.png (PNG copy)>]
+<compound.png, id=100, 1569.865pt x 906.38625pt>
+File: compound.png Graphic file (type png)
+<use compound.png>
+Package pdftex.def Info: compound.png  used on input line 199.
+(pdftex.def)             Requested size: 292.77632pt x 169.0342pt.
+<mesh.png, id=101, 1215.54124pt x 745.78625pt>
+File: mesh.png Graphic file (type png)
+<use mesh.png>
+Package pdftex.def Info: mesh.png  used on input line 214.
+(pdftex.def)             Requested size: 292.77632pt x 179.62962pt.
+ [7{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc} <./explode2.png (PNG cop
+y)> <./compound.png (PNG copy)>]
+<mesh_export.png, id=111, 655.69969pt x 663.22781pt>
+File: mesh_export.png Graphic file (type png)
+<use mesh_export.png>
+Package pdftex.def Info: mesh_export.png  used on input line 227.
+(pdftex.def)             Requested size: 209.12686pt x 211.52882pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
+(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 251.
+[8 <./mesh.png (PNG copy)>]
+Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
+nput line 276.
+ [9 <./mesh_export.png (PNG copy)>] [10]
+<parafoam.png, id=184, 905.63344pt x 751.30687pt>
+File: parafoam.png Graphic file (type png)
+<use parafoam.png>
+Package pdftex.def Info: parafoam.png  used on input line 389.
+(pdftex.def)             Requested size: 418.25372pt x 346.98103pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[11] [12 <./parafoam.png>] [13]
+<parafoam1.png, id=286, 1047.915pt x 739.26187pt>
+File: parafoam1.png Graphic file (type png)
+<use parafoam1.png>
+Package pdftex.def Info: parafoam1.png  used on input line 502.
+(pdftex.def)             Requested size: 418.25372pt x 295.05653pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<parafoam2.png, id=288, 1047.915pt x 739.26187pt>
+File: parafoam2.png Graphic file (type png)
+<use parafoam2.png>
+Package pdftex.def Info: parafoam2.png  used on input line 533.
+(pdftex.def)             Requested size: 418.25372pt x 295.05653pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[14] [15 <./parafoam1.png>]
+<parafoam3.png, id=347, 1047.915pt x 739.26187pt>
+File: parafoam3.png Graphic file (type png)
+<use parafoam3.png>
+Package pdftex.def Info: parafoam3.png  used on input line 580.
+(pdftex.def)             Requested size: 418.25372pt x 295.05653pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[16 <./parafoam2.png>] [17 <./parafoam3.png>] [18] [19] [20]
+<residuals.png, id=533, 926.71219pt x 517.935pt>
+File: residuals.png Graphic file (type png)
+<use residuals.png>
+Package pdftex.def Info: residuals.png  used on input line 775.
+(pdftex.def)             Requested size: 292.77632pt x 163.63246pt.
+<pU.png, id=536, 1300.1072pt x 755.82375pt>
+File: pU.png Graphic file (type png)
+<use pU.png>
+Package pdftex.def Info: pU.png  used on input line 789.
+(pdftex.def)             Requested size: 418.25372pt x 243.1487pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+<kOmega.png, id=537, 1300.1072pt x 755.82375pt>
+File: kOmega.png Graphic file (type png)
+<use kOmega.png>
+Package pdftex.def Info: kOmega.png  used on input line 796.
+(pdftex.def)             Requested size: 418.25372pt x 243.1487pt.
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[21 <./residuals.png>] [22 <./pU.png>] [23 <./kOmega.png>]
+(./Tutorial4_YPipe.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
@@ -1169,23 +1268,25 @@ Package rerunfilecheck Info: File `Tutorial4_YPipe.out' has not changed.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34031 strings out of 476047
- 693053 string characters out of 5792075
- 1932975 words of memory out of 5000000
- 55483 multiletter control sequences out of 15000+600000
- 608794 words of font info for 108 fonts, out of 8000000 for 9000
+ 34944 strings out of 476047
+ 704970 string characters out of 5792076
+ 2091975 words of memory out of 5000000
+ 55960 multiletter control sequences out of 15000+600000
+ 618756 words of font info for 135 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 115i,9n,405p,10910b,1237s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 115i,9n,405p,10910b,2491s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></u
 sr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmssbx10.pfb></usr/sh
-are/texmf/fonts/type1/public/lm/lmtt10.pfb></usr/share/texmf/fonts/type1/public
-/lm/lmtt12.pfb>
-Output written on Tutorial4_YPipe.pdf (5 pages, 908922 bytes).
+blic/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/
+texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/
+lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/tex
+mf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmt
+t10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
+Output written on Tutorial4_YPipe.pdf (23 pages, 4725830 bytes).
 PDF statistics:
- 114 PDF objects out of 1000 (max. 8388607)
- 82 compressed objects within 1 object stream
- 15 named destinations out of 1000 (max. 500000)
- 33846 words of extra memory for PDF output out of 35830 (max. 10000000)
+ 765 PDF objects out of 1000 (max. 8388607)
+ 682 compressed objects within 7 object streams
+ 402 named destinations out of 1000 (max. 500000)
+ 39154 words of extra memory for PDF output out of 42996 (max. 10000000)
 
