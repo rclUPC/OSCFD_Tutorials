@@ -241,7 +241,7 @@ english            % Language setting
 		source /usr/lib/openfoam/openfoam-2312/etc/bashrc
 		
 		# Copy the inflowOutflow in this folder
-		cp -r $FOAM_ETC/inflowOutflow ~/Tutorials/Tutorial_3/Ypipe
+		cp -r $FOAM_ETC/templates/inflowOutflow ~/Tutorials/Tutorial_3/Ypipe
 		# Note that we have changed the name with the copy
 		
 		# Go to the tutorial place
@@ -777,7 +777,7 @@ Run the mesher to perform this first stage.
 		\label{fig:residuals}
 	\end{figure}
 	
-	The floe rate in \texttt{inlet1} converges quite quickly to its final
+	The flow rate in \texttt{inlet1} converges quite quickly to its final
 	value of, approximately, \qty{-0.008}{m^3/s}. The negative value means that it is an
 	inlet flow.
 	

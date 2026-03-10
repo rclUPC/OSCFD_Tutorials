@@ -8,7 +8,7 @@
 \contentsline {subsection}{\numberline {2.3}Mesh generation with blockMesh and Python}{5}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}Boundary conditions and fluid properties}{11}{subsection.2.4}%
 \contentsline {subsubsection}{\numberline {2.4.1}Velocity}{11}{subsubsection.2.4.1}%
-\contentsline {subsubsection}{\numberline {2.4.2}Pressure}{12}{subsubsection.2.4.2}%
+\contentsline {subsubsection}{\numberline {2.4.2}Pressure}{13}{subsubsection.2.4.2}%
 \contentsline {subsubsection}{\numberline {2.4.3}Turbulent variables}{13}{subsubsection.2.4.3}%
 \contentsline {subsection}{\numberline {2.5}Viscosity of fluid}{15}{subsection.2.5}%
 \contentsline {section}{\numberline {3}Running the simulation}{15}{section.3}%

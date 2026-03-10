@@ -433,6 +433,15 @@ print(bmd.format(),file=open('./system/blockMeshDict','w'))
 print('blockMeshDict generated and copied in system folder')
 \end{lstlisting}
 
+The file has to be changed to executable and then we can run the python script to generate
+our \filename{system/blockMeshDict}
+
+\begin{lstlisting}[style=terminal]
+	# Remember: chmod changes permissions. "a" is for "all" and "x" is for "execute"
+	chmod a+x ./generate_OrificePlate_mesh.py
+	./generate_OrificePlate_mesh.py
+\end{lstlisting}
+
 Now the mesh can be generated with this new \filename{system/blockMeshDict}
 
 \begin{lstlisting}[style=terminal]
@@ -556,20 +565,20 @@ The \filename{0/k} file has to be this one:
 	{
 	type            turbulentIntensityKineticEnergyInlet;
 	intensity       0.05;
-	value           uniform \$kInlet;
+	value           uniform $kInlet;
 	}
 	
 	outlet
 	{
 	type            inletOutlet;
-	inletValue      uniform \$kInlet;
-	value           uniform \$kInlet;
+	inletValue      uniform $kInlet;
+	value           uniform $kInlet;
 	}
 	
 	wall
 	{
 	type            kqRWallFunction;
-	value           uniform \$kInlet;
+	value           uniform $kInlet;
 	}
 	
 	#includeEtc ``caseDicts/setConstraintTypes''
@@ -645,7 +654,7 @@ To monitor residuals and convergence of the simulation we are going to use the
 
 Get this dictionary from the openfoam distribution
 \begin{lstlisting}[style=terminal]
-	foamGetDictionary solverInfo
+	foamGetDict solverInfo
 \end{lstlisting}
 and edit it to include the variables $k$ and $\omega$.
 
