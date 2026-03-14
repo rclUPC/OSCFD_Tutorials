@@ -1,9 +1,9 @@
-This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.7)  14 MAR 2026 12:18
+This is pdfTeX, Version 3.141592653-2.6-1.40.25 (TeX Live 2023/Debian) (preloaded format=pdflatex 2026.3.7)  15 MAR 2026 00:24
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
-**Tutorial4_YPipe.tex
-(./Tutorial4_YPipe.tex
+**Tutorial5_YPipe_FreeCAD.tex
+(./Tutorial5_YPipe_FreeCAD.tex
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
 (/usr/share/texlive/texmf-dist/tex/latex/koma-script/scrartcl.cls
@@ -908,8 +908,8 @@ File: l3backend-pdftex.def 2024-01-04 L3 backend support: PDF output (pdfTeX)
 \l__color_backend_stack_int=\count345
 \l__pdf_internal_box=\box84
 )
-(./Tutorial4_YPipe.aux)
-\openout1 = `Tutorial4_YPipe.aux'.
+(./Tutorial5_YPipe_FreeCAD.aux)
+\openout1 = `Tutorial5_YPipe_FreeCAD.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 19.
 LaTeX Font Info:    ... okay on input line 19.
@@ -1026,9 +1026,10 @@ nslations-basic-dictionary')
 Package translations Info: loading dictionary `translations-basic-dictionary' f
 or `english'. on input line 19.
 Package hyperref Info: Link coloring ON on input line 19.
- (./Tutorial4_YPipe.out) (./Tutorial4_YPipe.out)
+ (./Tutorial5_YPipe_FreeCAD.out)
+(./Tutorial5_YPipe_FreeCAD.out)
 \@outlinefile=\write4
-\openout4 = `Tutorial4_YPipe.out'.
+\openout4 = `Tutorial5_YPipe_FreeCAD.out'.
 
 Class scrartcl Info: loading recommended package `bookmark'.
 (scrartcl)           Using `bookmark' together with `hyperref' is recommended,
@@ -1096,194 +1097,100 @@ LaTeX Font Info:    Trying to load font information for TS1+lmr on input line 3
 (/usr/share/texmf/tex/latex/lm/ts1lmr.fd
 File: ts1lmr.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
 )
-LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 3
-8.
-
-(/usr/share/texmf/tex/latex/lm/t1lmtt.fd
-File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
-)
-Package microtype Info: Loading generic protrusion settings for font family
-(microtype)             `lmtt' (encoding: T1).
-(microtype)             For optimal results, create family-specific settings.
-(microtype)             See the microtype manual for details.
-Package tocbasic Info: character protrusion at toc deactivated on input line 44
+Package tocbasic Info: character protrusion at toc deactivated on input line 47
 .
- (./Tutorial4_YPipe.toc
+ (./Tutorial5_YPipe_FreeCAD.toc
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <10.95> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <8> on input line 4.
 LaTeX Font Info:    External font `lmex10' loaded for size
 (Font)              <6> on input line 4.
- [1
+
+[1
 
 
 {/var/lib/texmf/fonts/map/pdftex/updmap/pdftex.map}{/usr/share/texmf/fonts/enc/
 dvips/lm/lm-ec.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-ts1.enc}])
 \tf@toc=\write5
-\openout5 = `Tutorial4_YPipe.toc'.
-
- [2] [3{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathit.enc}]
-<sketch.png, id=72, 1264.725pt x 790.45313pt>
-File: sketch.png Graphic file (type png)
-<use sketch.png>
-Package pdftex.def Info: sketch.png  used on input line 111.
-(pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-<sketch1.png, id=73, 1264.725pt x 790.45313pt>
-File: sketch1.png Graphic file (type png)
-<use sketch1.png>
-Package pdftex.def Info: sketch1.png  used on input line 120.
-(pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
- [4{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} <./sketch.png (PNG copy)> <.
-/sketch1.png (PNG copy)>]
-<pipe1.png, id=82, 1264.725pt x 790.45313pt>
-File: pipe1.png Graphic file (type png)
-<use pipe1.png>
-Package pdftex.def Info: pipe1.png  used on input line 130.
-(pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-<sketch2.png, id=84, 1264.725pt x 790.45313pt>
-File: sketch2.png Graphic file (type png)
-<use sketch2.png>
-Package pdftex.def Info: sketch2.png  used on input line 142.
-(pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
-<pipe2.png, id=85, 1264.725pt x 790.45313pt>
-File: pipe2.png Graphic file (type png)
-<use pipe2.png>
-Package pdftex.def Info: pipe2.png  used on input line 151.
-(pdftex.def)             Requested size: 292.77632pt x 182.98239pt.
+\openout5 = `Tutorial5_YPipe_FreeCAD.toc'.
 
 
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[5 <./pipe1.png (PNG copy)> <./sketch2.png (PNG copy)>]
-<explode1.png, id=96, 1265.47781pt x 550.30594pt>
-File: explode1.png Graphic file (type png)
-<use explode1.png>
-Package pdftex.def Info: explode1.png  used on input line 170.
-(pdftex.def)             Requested size: 292.77632pt x 127.31503pt.
-<explode2.png, id=97, 1099.10625pt x 529.22719pt>
-File: explode2.png Graphic file (type png)
-<use explode2.png>
-Package pdftex.def Info: explode2.png  used on input line 181.
-(pdftex.def)             Requested size: 292.77632pt x 140.97131pt.
+[2]
+LaTeX Font Info:    Trying to load font information for T1+lmtt on input line 5
+9.
+ (/usr/share/texmf/tex/latex/lm/t1lmtt.fd
+File: t1lmtt.fd 2015/05/01 v1.6.1 Font defs for Latin Modern
+)
+Package microtype Info: Loading generic protrusion settings for font family
+(microtype)             `lmtt' (encoding: T1).
+(microtype)             For optimal results, create family-specific settings.
+(microtype)             See the microtype manual for details.
+<open_file.png, id=36, 1735.48375pt x 1024.82875pt>
+File: open_file.png Graphic file (type png)
+<use open_file.png>
+Package pdftex.def Info: open_file.png  used on input line 67.
+(pdftex.def)             Requested size: 334.60425pt x 197.58116pt.
+ [3{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc} <./open_file.png>]
+<select_folder.png, id=51, 1191.45125pt x 945.5325pt>
+File: select_folder.png Graphic file (type png)
+<use select_folder.png>
+Package pdftex.def Info: select_folder.png  used on input line 102.
+(pdftex.def)             Requested size: 209.12686pt x 165.9612pt.
+<models.png, id=52, 1735.48375pt x 1024.82875pt>
+File: models.png Graphic file (type png)
+<use models.png>
+Package pdftex.def Info: models.png  used on input line 131.
+(pdftex.def)             Requested size: 292.77632pt x 172.88937pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-[6 <./pipe2.png (PNG copy)> <./explode1.png (PNG copy)>]
-<compound.png, id=104, 1569.865pt x 906.38625pt>
-File: compound.png Graphic file (type png)
-<use compound.png>
-Package pdftex.def Info: compound.png  used on input line 199.
-(pdftex.def)             Requested size: 292.77632pt x 169.0342pt.
-<mesh.png, id=105, 1215.54124pt x 745.78625pt>
-File: mesh.png Graphic file (type png)
-<use mesh.png>
-Package pdftex.def Info: mesh.png  used on input line 214.
-(pdftex.def)             Requested size: 292.77632pt x 179.62962pt.
- [7{/usr/share/texmf/fonts/enc/dvips/lm/lm-mathsy.enc} <./explode2.png (PNG cop
-y)> <./compound.png (PNG copy)>]
-<mesh_export.png, id=115, 655.69969pt x 663.22781pt>
-File: mesh_export.png Graphic file (type png)
-<use mesh_export.png>
-Package pdftex.def Info: mesh_export.png  used on input line 227.
-(pdftex.def)             Requested size: 209.12686pt x 211.52882pt.
+[4 <./select_folder.png (PNG copy)>] [5{/usr/share/texmf/fonts/enc/dvips/lm/lm-
+mathit.enc}{/usr/share/texmf/fonts/enc/dvips/lm/lm-rm.enc} <./models.png>]
+<boundary_inlet.png, id=74, 1735.48375pt x 1024.82875pt>
+File: boundary_inlet.png Graphic file (type png)
+<use boundary_inlet.png>
+Package pdftex.def Info: boundary_inlet.png  used on input line 180.
+(pdftex.def)             Requested size: 292.77632pt x 172.88937pt.
 
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-LaTeX Font Info:    Font shape `T1/lmtt/bx/n' in size <10.95> not available
-(Font)              Font shape `T1/lmtt/b/n' tried instead on input line 251.
-[8 <./mesh.png (PNG copy)>]
-Package hyperref Info: bookmark level for unknown lstlisting defaults to 0 on i
-nput line 276.
- [9 <./mesh_export.png (PNG copy)>] [10]
-<parafoam.png, id=185, 905.63344pt x 751.30687pt>
-File: parafoam.png Graphic file (type png)
-<use parafoam.png>
-Package pdftex.def Info: parafoam.png  used on input line 389.
-(pdftex.def)             Requested size: 418.25372pt x 346.98103pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[11] [12 <./parafoam.png>] [13]
-<parafoam1.png, id=290, 1047.915pt x 739.26187pt>
-File: parafoam1.png Graphic file (type png)
-<use parafoam1.png>
-Package pdftex.def Info: parafoam1.png  used on input line 502.
-(pdftex.def)             Requested size: 418.25372pt x 295.05653pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-<parafoam2.png, id=292, 1047.915pt x 739.26187pt>
-File: parafoam2.png Graphic file (type png)
-<use parafoam2.png>
-Package pdftex.def Info: parafoam2.png  used on input line 533.
-(pdftex.def)             Requested size: 418.25372pt x 295.05653pt.
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[14] [15 <./parafoam1.png>]
-<parafoam3.png, id=351, 1047.915pt x 739.26187pt>
-File: parafoam3.png Graphic file (type png)
-<use parafoam3.png>
-Package pdftex.def Info: parafoam3.png  used on input line 580.
-(pdftex.def)             Requested size: 418.25372pt x 295.05653pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[16 <./parafoam2.png>] [17 <./parafoam3.png>] [18] [19] [20]
-<residuals.png, id=542, 926.71219pt x 517.935pt>
-File: residuals.png Graphic file (type png)
-<use residuals.png>
-Package pdftex.def Info: residuals.png  used on input line 791.
-(pdftex.def)             Requested size: 292.77632pt x 163.63246pt.
- [21 <./residuals.png>]
-<pU.png, id=557, 1300.1072pt x 755.82375pt>
-File: pU.png Graphic file (type png)
-<use pU.png>
-Package pdftex.def Info: pU.png  used on input line 815.
-(pdftex.def)             Requested size: 418.25372pt x 243.1487pt.
-<kOmega.png, id=558, 1300.1072pt x 755.82375pt>
-File: kOmega.png Graphic file (type png)
-<use kOmega.png>
-Package pdftex.def Info: kOmega.png  used on input line 822.
-(pdftex.def)             Requested size: 418.25372pt x 243.1487pt.
-
-
-LaTeX Warning: `h' float specifier changed to `ht'.
-
-[22 <./pU.png>] [23 <./kOmega.png>] (./Tutorial4_YPipe.aux)
+[6 <./boundary_inlet.png>]
+<boundaries.png, id=86, 1735.48375pt x 1024.82875pt>
+File: boundaries.png Graphic file (type png)
+<use boundaries.png>
+Package pdftex.def Info: boundaries.png  used on input line 220.
+(pdftex.def)             Requested size: 292.77632pt x 172.88937pt.
+ [7 <./boundaries.png>]
+(./Tutorial5_YPipe_FreeCAD.aux)
  ***********
 LaTeX2e <2023-11-01> patch level 1
 L3 programming layer <2024-01-22>
  ***********
-Package rerunfilecheck Info: File `Tutorial4_YPipe.out' has not changed.
+Package rerunfilecheck Info: File `Tutorial5_YPipe_FreeCAD.out' has not changed
+.
 (rerunfilecheck)             Checksum: D41D8CD98F00B204E9800998ECF8427E;0.
  ) 
 Here is how much of TeX's memory you used:
- 34952 strings out of 476047
- 705088 string characters out of 5792076
- 2086975 words of memory out of 5000000
- 55962 multiletter control sequences out of 15000+600000
- 618579 words of font info for 133 fonts, out of 8000000 for 9000
+ 33891 strings out of 476047
+ 690016 string characters out of 5792076
+ 1932975 words of memory out of 5000000
+ 55324 multiletter control sequences out of 15000+600000
+ 608495 words of font info for 107 fonts, out of 8000000 for 9000
  85 hyphenation exceptions out of 8191
- 115i,9n,405p,10910b,2491s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 115i,7n,110p,10918b,1115s stack positions out of 10000i,1000n,20000p,200000b,200000s
 </usr/share/texmf/fonts/type1/public/lm/lmbx10.pfb></usr/share/texmf/fonts/ty
 pe1/public/lm/lmbx12.pfb></usr/share/texmf/fonts/type1/public/lm/lmmi10.pfb></u
-sr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share/texmf/fonts/type1/pu
-blic/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/
-texmf/fonts/type1/public/lm/lmri10.pfb></usr/share/texmf/fonts/type1/public/lm/
-lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.pfb></usr/share/tex
-mf/fonts/type1/public/lm/lmtk10.pfb></usr/share/texmf/fonts/type1/public/lm/lmt
-t10.pfb></usr/share/texmf/fonts/type1/public/lm/lmtt12.pfb>
-Output written on Tutorial4_YPipe.pdf (23 pages, 4729666 bytes).
+sr/share/texmf/fonts/type1/public/lm/lmmi6.pfb></usr/share/texmf/fonts/type1/pu
+blic/lm/lmmi8.pfb></usr/share/texmf/fonts/type1/public/lm/lmr10.pfb></usr/share
+/texmf/fonts/type1/public/lm/lmr12.pfb></usr/share/texmf/fonts/type1/public/lm/
+lmr6.pfb></usr/share/texmf/fonts/type1/public/lm/lmr8.pfb></usr/share/texmf/fon
+ts/type1/public/lm/lmssbx10.pfb></usr/share/texmf/fonts/type1/public/lm/lmsy10.
+pfb></usr/share/texmf/fonts/type1/public/lm/lmsy8.pfb></usr/share/texmf/fonts/t
+ype1/public/lm/lmtt10.pfb>
+Output written on Tutorial5_YPipe_FreeCAD.pdf (7 pages, 1069243 bytes).
 PDF statistics:
- 786 PDF objects out of 1000 (max. 8388607)
- 702 compressed objects within 8 object streams
- 412 named destinations out of 1000 (max. 500000)
- 39170 words of extra memory for PDF output out of 42996 (max. 10000000)
+ 193 PDF objects out of 1000 (max. 8388607)
+ 144 compressed objects within 2 object streams
+ 34 named destinations out of 1000 (max. 500000)
+ 33374 words of extra memory for PDF output out of 35830 (max. 10000000)
 

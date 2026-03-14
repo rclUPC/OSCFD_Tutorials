@@ -296,7 +296,7 @@ english            % Language setting
 		surfaceAdd Ypipe.obj outlet.obj Ypipe.obj
 		surfaceAdd Ypipe.obj wall.obj Ypipe.obj
 		
-		# The individual OBJ files can now be reomved as well
+		# The individual OBJ files can now be removed as well
 		rm inlet*.obj outlet.obj wall.obj
 		
 	\end{lstlisting}
@@ -305,7 +305,7 @@ english            % Language setting
 	OpenFOAM works by default in International System, that is, with \textbf{meters}. We have to scale the surface}
 	
 	\begin{lstlisting}[style=terminal, caption={Scale of the surface file.}]
-		# surfaceTrasnfromPoint -scale <scale factor> <input file> <output file>
+		# surfaceTransfromPoint -scale <scale factor> <input file> <output file>
 		# scale factor can be a vector or an scalar
 		# input and output files can be the same
 		surfaceTransformPoints -scale 0.001 Ypipe.obj Ypipe.obj
@@ -323,13 +323,13 @@ english            % Language setting
 	\end{lstlisting}
 	
 	\tip{\terminalcmd{sed} is a simple but powerful program to process text files. In this command, \texttt{-i} option is for 'interactive', the output file is the same as the input file, and the expression \texttt{'s/<A>/<B>/g'} substitutes \texttt{<A>} by \texttt{<B>} in all 
-	the occurrences in the file.}
+	the occurrences in the file (\texttt{s} is for \texttt{\textbf{s}ubstitute} and \texttt{g} for \texttt{\textbf{`}lobal}, the entire file, not only the first occurrence).}
 	
 	The last step is just to check the surface file and get the bounding box to use with \terminalcmd{blockMesh}.
 	
 	\begin{lstlisting}[style=terminal]
 		# check and print the bounding box
-		surfaceCheck -blockMesh yPipe.obj
+		surfaceCheck -blockMesh Ypipe.obj
 	\end{lstlisting}
 	
 	Note the output of this command:
@@ -378,7 +378,7 @@ english            % Language setting
 	everything is right.
 	
 	\begin{lstlisting}[style=terminal]
-		foamJob -s -log-app blockkMesh
+		foamJob -s -log-app blockMesh
 		paraFoam
 	\end{lstlisting}
 	
@@ -595,6 +595,22 @@ Run the mesher to perform this first stage.
 	 \tip{\terminalcmd{snappyHexMesh} can be ran with the option \texttt{-overwrite} and all the stages \texttt{on}. Then it performs the three stages and overwrites the final
 	 result on \filename{constant}. We have done this step by step for educational purposes and to shown how to control each stage.}
 	 
+	 \subsubsection{Mesh Quality Check}
+	 
+	 Before running the simulation, verify the mesh quality:
+	 
+	 \begin{lstlisting}[style=terminal]
+	 	# Check mesh quality
+	 	checkMesh
+	 	
+	 	# Look for these indicators:
+	 	# - Max non-orthogonality < 70 (ideally < 65)
+	 	# - Max skewness < 4
+	 	# - Number of faces with high aspect ratio (optional)
+	 \end{lstlisting}
+	 
+	 If the mesh has issues, you may need to adjust the \filename{snappyHexMeshDict} parameters.
+	 
 	 \subsection{Boundary conditions and physical parameters}
 	 
 	 We have to add another \texttt{inlet} in all the files of the folder \filename{0}.
@@ -781,7 +797,17 @@ Run the mesher to perform this first stage.
 	value of, approximately, \qty{-0.008}{m^3/s}. The negative value means that it is an
 	inlet flow.
 	
-	Contours of the four variables are shown in Figures \ref{fig:pu} and \ref{fig:komega}.
+	\subsection{Visualization in ParaView}
+	
+	Useful \texttt{ParaView} filters for this case:
+	\begin{itemize}
+		\item \textbf{Slice}: Create a plane through the pipe center to see internal flow
+		\item \textbf{Stream Tracer}: Generate flow lines from the inlets
+		\item \textbf{Clip}: Cut away half the pipe to see internal pressure distribution
+		\item \textbf{Calculator}: Compute derived quantities like total pressure or vorticity
+	\end{itemize}
+	
+	Contours of velocity and pressure are shown in Figure \ref{fig:pu}, and $k$ and $\omega$ in Figure \ref{fig:komega}.
 	
 	
 	\begin{figure}[h]

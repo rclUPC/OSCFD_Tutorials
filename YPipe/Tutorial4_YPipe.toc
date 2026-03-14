@@ -11,10 +11,12 @@
 \contentsline {subsubsection}{\numberline {3.3.1}The castellated mesh}{13}{subsubsection.3.3.1}%
 \contentsline {subsubsection}{\numberline {3.3.2}The snappy mesh}{14}{subsubsection.3.3.2}%
 \contentsline {subsubsection}{\numberline {3.3.3}The mesh with layers}{15}{subsubsection.3.3.3}%
-\contentsline {subsection}{\numberline {3.4}Boundary conditions and physical parameters}{17}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}Setting up the solver}{20}{subsection.3.5}%
+\contentsline {subsubsection}{\numberline {3.3.4}Mesh Quality Check}{17}{subsubsection.3.3.4}%
+\contentsline {subsection}{\numberline {3.4}Boundary conditions and physical parameters}{18}{subsection.3.4}%
+\contentsline {subsection}{\numberline {3.5}Setting up the solver}{21}{subsection.3.5}%
 \contentsline {subsection}{\numberline {3.6}Solving the flow and main results}{21}{subsection.3.6}%
-\contentsline {section}{\numberline {4}Exercises}{21}{section.4}%
-\contentsline {subsection}{\numberline {4.1}Modify pressure boundary conditions}{21}{subsection.4.1}%
-\contentsline {subsection}{\numberline {4.2}Modification of outlet pressure}{22}{subsection.4.2}%
+\contentsline {subsection}{\numberline {3.7}Visualization in ParaView}{22}{subsection.3.7}%
+\contentsline {section}{\numberline {4}Exercises}{22}{section.4}%
+\contentsline {subsection}{\numberline {4.1}Modify pressure boundary conditions}{22}{subsection.4.1}%
+\contentsline {subsection}{\numberline {4.2}Modification of outlet pressure}{23}{subsection.4.2}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
