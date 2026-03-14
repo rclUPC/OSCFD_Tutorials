@@ -1,0 +1,647 @@
+% ==============================================
+% CFD Tutorial Template: OpenFOAM Terminal Basics
+% Class: scrartcl (KOMA-Script) - optimized for tutorials
+% Content: pitzDaily with simpleFoam
+% ==============================================
+
+\documentclass[
+parskip=half,      % Space between paragraphs (better for steps)
+DIV=12,            % Optimal margins for readability
+headings=normal,   % Professional heading sizes
+fontsize=11pt,     % Slightly larger for screen reading
+english            % Language setting
+]{scrartcl}
+
+\input{../preamble.tex}
+\usetikzlibrary{intersections}
+
+% ========== DOCUMENT START ==========
+\begin{document}
+	
+	% ========== TITLE PAGE ==========
+	\title{Tutorial \#5: 3D Y-Pipe with FreeCAD}
+	\subtitle{Incompressible Steady Flow: 3D Y-Pipe with simpleFOAM in FreeCAD}
+	\subject{Open Source CFD }
+	\author{Robert Castilla \\ Department of Fluid Mechanics}
+	\date{2025-26 \\ Version 1.0}
+	\publishers{Learning Objectives:
+		\begin{itemize}
+			\item Stup a 3D case with FreeCAD
+	\end{itemize}}
+	
+	\maketitle
+	
+	% ========== ABSTRACT ==========
+	\begin{abstract}
+		This tutorial shows the work flow for the simulation of a 3D Y-shaped
+		pipe geometry with FreeCAD and the CfdOf workbench.
+		The geometry will be considered already as created. If you don't have
+		the geometry, make the first part of Tutorial #4.  
+	\end{abstract}
+	
+	\tableofcontents
+	\newpage
+	
+	\section{Introduction}
+	
+	
+	 
+	\section{Setup of the case}
+	
+	Like in Tutorial \#3, simulation of orifice plate, we are going to use the \texttt{inflowOutflow} template case.
+	
+	\begin{lstlisting}[style=terminal]
+		# load OpenFOAM if it is not included in the .bashrc file
+		source /usr/lib/openfoam/openfoam-2312/etc/bashrc
+		
+		# Copy the inflowOutflow in this folder
+		cp -r $FOAM_ETC/templates/inflowOutflow ~/Tutorials/Tutorial_3/Ypipe
+		# Note that we have changed the name with the copy
+		
+		# Go to the tutorial place
+		cd ~/Tutorials/Tutorial_3/Ypipe
+	\end{lstlisting}
+	
+	We are going to mesh the Ypipe geometry with \terminalcmd{snappyHexMesh}. Read the \filename{README} file in the case for details. 
+	
+	\terminalcmd{snappyHexMesh} is very powerful and the result is usually a high
+	quality mesh. But it requires skills, time and patience in order to use it correctly.  
+	
+	The presentation \cite{Jackson2012} gives a very detailed description of the program,
+	 although a little outdated. Web page \cite{Thawtar2024} is also 
+	a useful document with hints for using \terminalcmd{snappyHexMesh} 
+	
+	Basically, in order to make the mesh \terminalcmd{snappyHexMesh} needs three elements in the 
+	case:
+	\begin{itemize}
+		\item A surface file, in format STL or OBJ, placed in the folder
+		\filename{constant/triSurface}.
+		\item A background structured mesh, usually provided by \terminalcmd{blockMesh}.
+		\item A dictionary \filename{snappyHexMesDict}, placed in \filename{system} directory, 
+		with all the parameter needed by \terminalcmd{snappyHexMesh} to make the mesh.
+	\end{itemize}
+	
+	\subsection{Preparation of the surface file}
+	
+	Move the four \filename{*.stl} files generated with FreeCAD to the \filename{constant/triSurface} folder and perform the operations listed 
+	in Listing \ref{lst:surface}.
+	
+	\begin{lstlisting}[style=terminal, caption={Preparation of the surface file.}, 
+		label={lst:surface}]
+		# We are considering that the STL files are in the Tutorial_4 folder
+		mv ../*.stl constant/triSurface
+		
+		# Go to the folder to continue the work there and remove the template file
+		cd constant/triSurface
+		rm CAD.obj
+		
+		# Convert STL files to OBJ format. The option -clean, obviously cleans the 
+		# surface file in the process
+		surfaceConvert -clean inlet1.stl inlet1.obj
+		surfaceConvert -clean inlet2.stl inlet2.obj
+		surfaceConvert -clean outlet.stl outlet.obj
+		surfaceConvert -clean wall.stl wall.obj
+		
+		# The STL files can now be removed, if desired
+		rm *.stl
+		
+		# The four surfaces are joined in only one surface with four regions
+		surfaceAdd inlet1.obj inlet2.obj Ypipe.obj
+		surfaceAdd Ypipe.obj outlet.obj Ypipe.obj
+		surfaceAdd Ypipe.obj wall.obj Ypipe.obj
+		
+		# The individual OBJ files can now be reomved as well
+		rm inlet*.obj outlet.obj wall.obj
+		
+	\end{lstlisting}
+	
+	\warning{The surface has been created in \texttt{FreeCAD} in \textbf{millimeters}, but 
+	OpenFOAM works by default in International System, that is, with \textbf{meters}. We have to scale the surface}
+	
+	\begin{lstlisting}[style=terminal, caption={Scale of the surface file.}]
+		# surfaceTrasnfromPoint -scale <scale factor> <input file> <output file>
+		# scale factor can be a vector or an scalar
+		# input and output files can be the same
+		surfaceTransformPoints -scale 0.001 Ypipe.obj Ypipe.obj
+	\end{lstlisting}
+	
+	Note that the regions in \filename{Ypipe.obj} fiel have still an annoying \texttt{(Meshed)} 
+	in the name. We can easily get rid of this with the stream editor \terminalcmd{sed}.
+	
+	\begin{lstlisting}[style=terminal, caption={Removing the \texttt{(Meshed)} in the surface file.}]
+		# just for checking, print the lines where ther is a (Meshed) region
+		grep '(Meshed)' Ypipe.obj
+		
+		# Remove the expression
+		sed -i 's/(Meshed)//g' Ypipe.obj
+	\end{lstlisting}
+	
+	\tip{\terminalcmd{sed} is a simple but powerful program to process text files. In this command, \texttt{-i} option is for 'interactive', the output file is the same as the input file, and the expression \texttt{'s/<A>/<B>/g'} substitutes \texttt{<A>} by \texttt{<B>} in all 
+	the occurrences in the file.}
+	
+	The last step is just to check the surface file and get the bounding box to use with \terminalcmd{blockMesh}.
+	
+	\begin{lstlisting}[style=terminal]
+		# check and print the bounding box
+		surfaceCheck -blockMesh yPipe.obj
+	\end{lstlisting}
+	
+	Note the output of this command:
+	
+	\begin{lstlisting}[style=output]
+		...
+		
+		vertices
+		(
+		(0 -0.2 -0.05)
+		(0.4 -0.2 -0.05)
+		(0.4 0.6 -0.05)
+		(0 0.6 -0.05)
+		(0 -0.2 0.05)
+		(0.4 -0.2 0.05)
+		(0.4 0.6 0.05)
+		(0 0.6 0.05)
+		);
+		...
+		
+	\end{lstlisting}
+	
+	\subsection{The background mesh}
+	
+	With the output of the last command we modify the \filename{system/blockMeshDict} as in listing \ref{lst:blockMeshDict}
+	
+	
+	\begin{lstlisting}[style=output, caption={\texttt{blockMeshDict} section of variables definition}, label={lst:blockMeshDict}]
+	...
+	backgroundMesh
+	{
+		xMin    0;
+		xMax     0.4;
+		yMin    -0.2;
+		yMax     0.6;
+		zMin    -0.05;
+		zMax     0.05;
+		xCells  20;
+		yCells  40;
+		zCells  5;
+	}
+	...	
+	\end{lstlisting}
+	
+	Create the block mesh and visualize it along with the surface file to check that 
+	everything is right.
+	
+	\begin{lstlisting}[style=terminal]
+		foamJob -s -log-app blockkMesh
+		paraFoam
+	\end{lstlisting}
+	
+	It should look like in Figure \ref{fig:blockMesh}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{parafoam}
+		\caption{Block mesh and the surface for the geometry}
+		\label{fig:blockMesh}
+	\end{figure}
+	
+	
+	\subsection{Generation of the mesh}
+	
+	The program \terminalcmd{snappyHexMesh} makes the mesh in three stages:
+	\begin{enumerate}
+		\item \texttt{castellated} It refines the background mesh and defines the patches 
+		according to the parameter
+		provided by the dictionary. The result is something reminiscent of Minecraft.
+		\item \texttt{snappy} It deforms the castellated mesh to fit the surface geometry.
+		\item \texttt{addLayer} Insert cell layers to resolve boundary layer in the cells
+		close to the walls.
+	\end{enumerate}
+	
+	These stages can be enabled and disabled in the first section of the dictionary
+	
+	\begin{lstlisting}[style=output]
+		...
+		castellatedMesh on;
+		snap            off;
+		addLayers       off;
+		...
+	\end{lstlisting}
+	
+	\subsubsection{The castellated mesh}
+	
+	First, replace all the occurrences of \texttt{CAD} with \texttt{Ypipe} in the dictionary
+	
+	\begin{lstlisting}[style=terminal]
+		sed -i 's/CAD/Ypipe/g' system/snappyHexMeshDict
+	\end{lstlisting}
+	
+	Modify the \texttt{geometry} and \texttt{refinementSurfaces} subdictionaries as shown in Listing \ref{lst:geometry}.
+	the \text
+	
+	\begin{lstlisting}[style=output, caption={\texttt{geometry} subdictionary},
+		label={lst:geometry}]
+	...
+	geometry
+	{
+		Ypipe.obj
+		{
+			type triSurfaceMesh;
+			name Ypipe;
+			regions
+			{
+				inlet1  { name inlet1; }
+				inlet2  { name inlet2; }
+				outlet  { name outlet; }
+				wall    { name wall;}
+			}
+		}
+	};
+	
+	...
+
+	refinementSurfaces
+	{
+		Ypipe
+		{
+			level (2 2);
+			patchInfo { type wall; }
+			
+			regions
+			{
+				"inlet.*"
+				{
+					level (2 2);
+					patchInfo
+					{
+						type patch;
+						inGroups (inlet);
+					}
+				}
+				
+				outlet
+				{
+					level (2 2);
+					patchInfo
+					{
+						type patch;
+						inGroups (outlet);
+					}
+				}
+			}
+		}
+	}
+		\end{lstlisting}
+
+\tip{For the refinement level definition, \texttt{(n m)} stands for \texttt{n} levels of 
+refinement in the flat regions and \texttt{m} levels in corners.}
+
+The rest of the \texttt{castellatedMesh} subdictionary can be keep as it is.
+
+Run the mesher to perform this first stage.
+
+	\begin{lstlisting}[style=terminal]
+	foamJob -s -log-app snappyHexMesh
+	
+	# move the log to avoid the overwritting by other stages
+	mv log.snappyHexMesh log.castellated
+	\end{lstlisting}
+	
+	The result is written in folder \filename{1}, 
+	and can be displayed with \terminalcmd{paraFoam} (see Figure \ref{fig:parafoam1}). 
+	Probably you will understand now the reference to Minecraft.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1\linewidth]{parafoam1}
+		\caption{Result of \texttt{castellated} stage.}
+		\label{fig:parafoam1}
+	\end{figure}
+	
+	\subsubsection{The snappy mesh}
+	
+	In order to perform the second stage, just enable it and disable the first one,
+	
+		\begin{lstlisting}[style=output]
+		...
+		castellatedMesh off;
+		snap            on;
+		addLayers       off;
+		...
+	\end{lstlisting}
+	
+	and run again the mesher
+	
+		\begin{lstlisting}[style=terminal]
+		foamJob -s -log-app snappyHexMesh
+		
+		# move the log to avoid the overwritting by other stages
+		mv log.snappyHexMesh log.snappy
+	\end{lstlisting}
+	
+	Now the result is saved in the folder \filename{2}, and it looks like in the
+	Figure \ref{fig:parafoam2}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=1\linewidth]{parafoam2}
+		\caption{Result of \texttt{snappy} stage.}
+		\label{fig:parafoam2}
+	\end{figure}
+	
+	\subsubsection{The mesh with layers}
+	
+	The last stage is done by enabling and modifying the \texttt{addLayerControls} 
+	subdictionary
+	
+		\begin{lstlisting}[style=output]
+		...
+		castellatedMesh off;
+		snap            off;
+		addLayers       on;
+		...
+		addLayersControls
+		{
+			layers
+			{
+				"wall.*"
+				{
+					nSurfaceLayers 3;
+				}
+			}
+			
+			relativeSizes       true; // false, usually with firstLayerThickness
+			expansionRatio      1.2;
+			finalLayerThickness 0.5;
+			minThickness        1e-3;
+			//  firstLayerThickness 0.01;
+			
+			//  maxThicknessToMedialRatio 0.6;
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[style=terminal]
+		foamJob -s -log-app snappyHexMesh
+		
+		# move the log to avoid the overwritting by other stages
+		mv log.snappyHexMesh log.layers
+	\end{lstlisting}
+	
+	The result is shown in Figure \ref{fig:parafoam3}.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{parafoam3}
+		\caption{The mesh with layers in the wall.}
+		\label{fig:parafoam3}
+	\end{figure}
+	
+	 This mesh can now be placed in the \filename{constant} folder to be used with the simulation, and the intermediate stages can be removed
+	 
+	 \begin{lstlisting}[style=terminal]
+	 	# Remove the block mesh
+	 	rm -r constant/polyMesh
+	 	
+	 	# ... and replaced it by the definitive mesh
+	 	mv 3/polyMesh constant
+	 \end{lstlisting}
+	 
+	 \tip{\terminalcmd{snappyHexMesh} can be ran with the option \texttt{-overwrite} and all the stages \texttt{on}. Then it performs the three stages and overwrites the final
+	 result on \filename{constant}. We have done this step by step for educational purposes and to shown how to control each stage.}
+	 
+	 \subsection{Boundary conditions and physical parameters}
+	 
+	 We have to add another \texttt{inlet} in all the files of the folder \filename{0}.
+	 
+	 \begin{lstlisting}[style=output, caption={0/U}]
+	 Uinlet          (0 4 0);
+	 
+	 dimensions      [0 1 -1 0 0 0 0];
+	 
+	 internalField   uniform (0 0 0);
+	 
+	 boundaryField
+	 {
+	 	inlet1
+	 	{
+	 		type            pressureInletOutletVelocity;
+	 		value           uniform (0 0 0);
+	 	}
+	 	
+	 	inlet2
+	 	{
+	 		type            fixedValue;
+	 		value           uniform $Uinlet;
+	 	}
+	 	
+	 	outlet
+	 	{
+	 		type            pressureInletOutletVelocity;
+	 		value           uniform (0 0 0);
+	 	}
+	 	
+	 	wall
+	 	{
+	 		type            noSlip;
+	 	}
+	 	
+	 	#includeEtc "caseDicts/setConstraintTypes"
+	 }
+	 \end{lstlisting}
+	 
+	 \begin{lstlisting}[style=output, caption={0/p}]
+	 dimensions      [0 2 -2 0 0 0 0];
+	 
+	 internalField   uniform 0;
+	 
+	 boundaryField
+	 {
+	 	inlet1
+	 	{
+	 		type            fixedValue;
+	 		value           uniform 0;
+	 	}
+	 	
+	 	inlet2
+	 	{
+	 		type            zeroGradient;
+	 	}
+	 	
+	 	outlet
+	 	{
+	 		type            fixedValue;
+	 		value           uniform 0;
+	 	}
+	 	
+	 	wall
+	 	{
+	 		type            zeroGradient;
+	 	}
+	 	
+	 	#includeEtc "caseDicts/setConstraintTypes"
+	 }
+	\end{lstlisting}
+	
+		 \begin{lstlisting}[style=output, caption={0/k}]
+		kInlet          0.00375;
+		
+		dimensions      [0 2 -2 0 0 0 0];
+		
+		internalField   uniform $kInlet;
+		
+		boundaryField
+		{
+			inlet1
+			{
+				type            inletOutlet;
+				inletValue      uniform $kInlet;
+				value           uniform $kInlet;
+			}
+			
+			inlet2
+			{
+				type            turbulentIntensityKineticEnergyInlet;
+				intensity       0.05;
+				value           uniform $kInlet;
+			}
+			
+			outlet
+			{
+				type            inletOutlet;
+				inletValue      uniform $kInlet;
+				value           uniform $kInlet;
+			}
+			
+			wall
+			{
+				type            kqRWallFunction;
+				value           uniform $kInlet;
+			}
+			
+			#includeEtc "caseDicts/setConstraintTypes"
+		}
+	\end{lstlisting}
+	
+	\begin{lstlisting}[style=output, caption={0/omega}]
+		omegaInlet      80.0;
+		
+		dimensions      [0 0 -1 0 0 0 0];
+		
+		internalField   uniform $omegaInlet;
+		
+		boundaryField
+		{
+			inlet1
+			{
+				type            inletOutlet;
+				inletValue      uniform $omegaInlet;
+				value           uniform $omegaInlet;
+			}
+			
+			inlet2
+			{
+				type            turbulentMixingLengthFrequencyInlet;
+				mixingLength    0.0035;
+				value           uniform $omegaInlet;
+			}
+			
+			outlet
+			{
+				type            inletOutlet;
+				inletValue      uniform $omegaInlet;
+				value           uniform $omegaInlet;
+			}
+			
+			wall
+			{
+				type            omegaWallFunction;
+				value           uniform $omegaInlet;
+			}
+			
+			#includeEtc "caseDicts/setConstraintTypes"
+		}
+	\end{lstlisting}
+	
+	The fluid is water, like in Tutorial \#3. Modify \filename{constant/transportProperties} according to that.
+	
+	\subsection{Setting up the solver}
+	
+	Like in Tutorial \#3, we include the \texttt{solverInfo} function with the variables 
+	\texttt{k} and \texttt{omega} added to the dictionary, and the function called from 
+	\filename{system/controlDict}. Also, we include the \texttt{flowRatePatch} function,
+	defining the patch \texttt{inlet1} in order to monitor the flow rate dragged
+	by the flow in \texttt{inlet2}.
+	
+	\subsection{Solving the flow and main results}
+	
+	Run the solver with
+	
+	 \begin{lstlisting}[style=terminal]
+		foamjob -s -log-app simpleFoam
+	\end{lstlisting}
+	
+	The residuals are not very low, specially for pressure and turbulence magnitudes.
+	 This is an usual trend for 
+	pressure-driven flows.
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=0.7\linewidth]{residuals}
+		\caption{Plot of residuals}
+		\label{fig:residuals}
+	\end{figure}
+	
+	The flow rate in \texttt{inlet1} converges quite quickly to its final
+	value of, approximately, \qty{-0.008}{m^3/s}. The negative value means that it is an
+	inlet flow.
+	
+	Contours of the four variables are shown in Figures \ref{fig:pu} and \ref{fig:komega}.
+	
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{pU}
+		\caption{Contours of velocity and pressure in the middle plane.}
+		\label{fig:pu}
+	\end{figure}
+	
+	\begin{figure}[h]
+		\centering
+		\includegraphics[width=\linewidth]{kOmega}
+		\caption{Contours of $k$ and $\omega$ in the middle plane.}
+		\label{fig:komega}
+	\end{figure}
+	
+	\section{Exercises}
+	
+	\subsection{Modify pressure boundary conditions}
+	
+	The simulation has been conducted with fixed static boundary conditions in both \texttt{inlet1}
+	and \texttt{outlet}. Nevertheless, it would be more correct to define both boundaries
+	as \texttt{totalPressure}. Read the documentation for this boundary condition and 
+	run again the simulation with both total pressures with value \qty{0}{m^2/s^2}
+	
+	\subsection{Modification of outlet pressure}
+	
+	The outlet pressure has ben defined like the inlet pressure, \qty{0}{m^2/s^2}. But
+	this device acts like a pump, where the flow in \texttt{inlet1} is dragged against a
+	adverse pressure gradient. Compute the flow rate when the \texttt{outlet} total pressure
+	is larger than the inlet total pressure. 
+	
+	Consider that the outlet pressure is 
+	$N\times \qty{0.1}{m^2/s^2}$, where $N$ is the number of your group.	
+	
+	\begin{thebibliography}{9}
+		
+	\bibitem{Jackson2012}
+	Jackson A. (2012) \textit{A Comprehensive Tour of snappyHexMesh} 7th OpenFOAM Workshop
+	\href{https://openfoamwiki.net/images/f/f0/Final-AndrewJacksonSlidesOFW7.pdf}{link} (Visited on March 2026)
+	
+	\bibitem{Thawtar2024}
+	Thawtar (2024)	
+	\href{https://cfdmonkey.com/tips-and-tricks-for-significantly-improving-your-snappyhexmesh/}
+	{link}
+	(Visited on March 2026)
+	
+	\end{thebibliography}
+\end{document}
