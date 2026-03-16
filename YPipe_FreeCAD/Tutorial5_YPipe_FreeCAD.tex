@@ -158,7 +158,7 @@ english            % Language setting
 	 \begin{enumerate}
 	 	\item \textbf{Add inlet2}:
 	 	\begin{itemize}
-	 		\item Select \texttt{inlet2} face (secondary inlet). It will become green.
+	 		\item Select \texttt{inlet2} face (primary inlet). It will become green.
 	 		\item Click \textbf{Fluid boundary} button. It will become blue
 	 		\item \texttt{Type}: \texttt{Inlet, Uniform velocity }
 	 		\item \texttt{Velocity}: \texttt{(0 4 0)} m/s (vertical direction)
@@ -169,7 +169,7 @@ english            % Language setting
 	 			\item \texttt{Intensity (I)}: 5\%
 	 			\item \texttt{Length Scale (l)}: \qty{1.4}{mm}
 	 		\end{itemize}
-	 		\item Rename it as \texttt{inletSecondary}
+	 		\item Rename it as \texttt{inletMain}
 	 	\end{itemize}
 	 	
 	 		\tip{\texttt{CfdOf} automatically calculates $k$ and $\omega$ from these parameters using standard formulas: 
@@ -188,7 +188,7 @@ english            % Language setting
 	 		\item \texttt{Type}: \texttt{inlet, Total pressure}
 	 		\item Set \texttt{Pressure} : \qty{0}{Pa}
 	 		\item Same turbulence specification as in \texttt{inlet2}
-	 		\item Rename it as \texttt{inletMain}
+	 		\item Rename it as \texttt{inletSecondary}
 	 	\end{itemize}
 	 	
 
@@ -223,7 +223,136 @@ english            % Language setting
 	 	\end{figure}
 	 \end{enumerate}
 	
+	\section{Mesh generation with \terminalcmd{snappyHexMesh}}
 	
+	\begin{itemize}
+		\item 	With the \texttt{Pad} selected, click on \texttt{CFD Mesh}
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\linewidth]{mesh1}
+			\caption{Adding a mesh to the model}
+			\label{fig:mesh1}
+		\end{figure}
+		\item Choose \texttt{snappyHexMesh} as mesh utility
+		\begin{itemize}
+			\item Define the \texttt{Base element size} as \qty{5}{mm}
+			\item Clik on \texttt{Search} to pick an inner point for the mesh
+			\item Leave the other parameters with the default values
+			\item Click on \texttt{Write mesh case} to write the case for meshing in the disk. Optionally the case can be reviewed
+			\item Click on \texttt{Run mesher} 
+			\item When the mesh is complete it can be viewed with \texttt{ParaView}. Teh result should be similar to the \texttt{snappy} stage of Tutorial \#4. 
+		\end{itemize} 
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\linewidth]{mesh2}
+			\caption{Setup of mesh with \terminalcmd{snappyHexMesh}.}
+			\label{fig:mesh2}
+		\end{figure}
+		
+		\item To create the boundary layer, select the mesh element and click 
+		on \texttt{Mesh refinement} (see Figure \ref{fig:mesh3})
+		\begin{itemize}
+			\item Leave the default selection \texttt{Surface refinement}
+			\item Write 1.0 as \texttt{Relative mesh size}.
+			\item Click on the \texttt{Boundary layers} check box.
+			\item \texttt{Number of layers $\rightarrow$ 3}
+			\item \texttt{Expansion ratio $\rightarrow$ 1.2}
+			\item Select the \texttt{wall} element from the list (second tab on the last box). Optionally it can be selected in the model, but it is easier to select from the list.
+			\item Save with \texttt{Ok}
+		\end{itemize}
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\linewidth]{mesh3}
+			\caption{Add the boundary layer to the mesh}
+			\label{fig:mesh3}
+		\end{figure}
+		
+		\item Go back to the \texttt{Pad\_Mesh} element, write again the case mesh and run the mesher to get the mesh with the boundary layer. It should be similar to the mesh generated in Tutorial \#4.
+		
+		\begin{figure}[h]
+			\centering
+			\includegraphics[width=0.5\linewidth]{mesh4}
+			\caption{Final mesh viewed in \texttt{ParaView}}
+			\label{fig:mesh4}
+		\end{figure}
+		
+		\section{Initialisation of the case and running the case}
+		
+		\begin{itemize}
+			\item Click on \texttt{Initialise} to get the initial fields for 
+			the simulation
+			\begin{itemize}
+				\item Check \texttt{Velocity $\rightarrow$ Potential flow}
+				\item Check \texttt{Pressure $\rightarrow$ Potential flow}
+				\item Check \texttt{Turbulence $\rightarrow$ Use value from boundary $\rightarrow$ inletSecondary}
+				\item Save with \texttt{OK}
+			\end{itemize}
+			
+			\item Select the element \texttt{CfdSolver} and change the 
+			\texttt{Parallel} parameter to \texttt{false}
+			\item Change the maximum number of iterations to 1000
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.5\linewidth]{solver1}
+				\caption{Disable the parallel simulation}
+				\label{fig:solver1}
+			\end{figure}
+			
+			\item Double-click on \texttt{CfdSolver} and write the case.
+			\item Run the solver. It will not converge completely. We should change numerical schemes or other solver settings in order to get a better convergence, but it is beyond the scope of this Tutorial. It will take about 5 minuts to complete the 100 iterations
+			
+			\begin{figure}[h]
+				\centering
+				\includegraphics[width=0.5\linewidth]{residuals}
+				\caption{Residuals of the simulation}
+				\label{fig:residuals}
+			\end{figure}
+			
+			\section{Visualisation of computation of flow rate with \texttt{ParaView}}
+			
+			\begin{itemize}
+				\item Open the results with \texttt{ParaView} from the solver box
+				\item Visualisation of fields is similar to the description 
+				in Tutorial \#4.
+				\item To compute flow rate in the \texttt{inletSecondary} 
+				patch, select uniquely this in the \texttt{OpenFOAMReader1} element
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=0.5\linewidth]{paraview1}
+					\caption{Selection of \texttt{inletSecondary} patch in the visualisation.}
+					\label{fig:paraview1}
+				\end{figure}
+				 
+				\item In the canvas, only the \texttt{inletSecondary} patch
+				will be visible.
+				\item Apply the filter \texttt{Integrate Variables}, with \texttt{Cell data as atribute}.
+				\item The flow rate is the integral of the component $x$ of the
+				velocity $U$ (see Figure \ref{fig:paraview2})
+				
+				\begin{figure}[h]
+					\centering
+					\includegraphics[width=0.7\linewidth]{paraview2}
+					\caption{Computation of flow rate in \texttt{inletSecondary}}
+					\label{fig:paraview2}
+				\end{figure}
+				
+			\end{itemize}
+		\end{itemize}
+		
+\section{Exercises}
+
+The same exercises of Tutorial \#4 can be done here. 
+
+\subsection{Question about flow rate}
+
+The flow rate obtained in this tutorial is different from the one computed in Tutorial \#4. Can you see why? How should the simulation be changed in order to get the same flow rate?		
+		
+	\end{itemize}
+
 	
 
 		

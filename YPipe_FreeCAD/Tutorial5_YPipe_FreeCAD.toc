@@ -6,4 +6,9 @@
 \contentsline {section}{\numberline {3}Defining Boundary Conditions}{5}{section.3}%
 \contentsline {subsection}{\numberline {3.1}Identifying Boundary Faces}{5}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}Creating Boundary Conditions}{5}{subsection.3.2}%
+\contentsline {section}{\numberline {4}Mesh generation with \textbf {\texttt {\textcolor {cmdcolor}{snappyHexMesh}}}}{7}{section.4}%
+\contentsline {section}{\numberline {5}Initialisation of the case and running the case}{9}{section.5}%
+\contentsline {section}{\numberline {6}Visualisation of computation of flow rate with \texttt {ParaView}}{10}{section.6}%
+\contentsline {section}{\numberline {7}Exercises}{11}{section.7}%
+\contentsline {subsection}{\numberline {7.1}Question about flow rate}{11}{subsection.7.1}%
 \providecommand \tocbasic@end@toc@file {}\tocbasic@end@toc@file 
