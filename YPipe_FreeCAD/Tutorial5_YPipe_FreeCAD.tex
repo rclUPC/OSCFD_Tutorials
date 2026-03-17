@@ -236,11 +236,11 @@ english            % Language setting
 		\item Choose \texttt{snappyHexMesh} as mesh utility
 		\begin{itemize}
 			\item Define the \texttt{Base element size} as \qty{5}{mm}
-			\item Clik on \texttt{Search} to pick an inner point for the mesh
+			\item Click on \texttt{Search} to pick an inner point for the mesh
 			\item Leave the other parameters with the default values
 			\item Click on \texttt{Write mesh case} to write the case for meshing in the disk. Optionally the case can be reviewed
 			\item Click on \texttt{Run mesher} 
-			\item When the mesh is complete it can be viewed with \texttt{ParaView}. Teh result should be similar to the \texttt{snappy} stage of Tutorial \#4. 
+			\item When the mesh is complete it can be viewed with \texttt{ParaView}. The result should be similar to the \texttt{snappy} stage of Tutorial \#4. 
 		\end{itemize} 
 		
 		\begin{figure}[h]
@@ -278,6 +278,10 @@ english            % Language setting
 			\label{fig:mesh4}
 		\end{figure}
 		
+		\tip{The mesh files are written to the output directory you specified in preferences. 
+			You can examine the generated \filename{snappyHexMeshDict} to see how your GUI settings 
+			translate to OpenFOAM syntax!}
+			
 		\section{Initialisation of the case and running the case}
 		
 		\begin{itemize}
@@ -302,7 +306,16 @@ english            % Language setting
 			\end{figure}
 			
 			\item Double-click on \texttt{CfdSolver} and write the case.
-			\item Run the solver. It will not converge completely. We should change numerical schemes or other solver settings in order to get a better convergence, but it is beyond the scope of this Tutorial. It will take about 5 minuts to complete the 100 iterations
+			\item Run the solver. It will take about 5 minutes to complete the 1000 iterations
+			
+			\important{The residuals in Figure \ref{fig:residuals} show that convergence is not perfect. 
+				This is common for complex 3D cases with default solver settings. In practice, you would:
+				\begin{itemize}
+					\item Adjust relaxation factors (try p=0.2, U=0.5)
+					\item Refine mesh near high-gradient areas
+					\item Run more iterations (2000+)
+				\end{itemize}
+				For this tutorial, we accept these residuals to keep runtime reasonable.}
 			
 			\begin{figure}[h]
 				\centering
@@ -329,7 +342,7 @@ english            % Language setting
 				 
 				\item In the canvas, only the \texttt{inletSecondary} patch
 				will be visible.
-				\item Apply the filter \texttt{Integrate Variables}, with \texttt{Cell data as atribute}.
+				\item Apply the filter \texttt{Integrate Variables}, with \texttt{Cell data as attribute}.
 				\item The flow rate is the integral of the component $x$ of the
 				velocity $U$ (see Figure \ref{fig:paraview2})
 				
