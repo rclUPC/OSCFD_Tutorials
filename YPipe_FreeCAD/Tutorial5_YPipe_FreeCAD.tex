@@ -347,9 +347,19 @@ english            % Language setting
 
 The same exercises of Tutorial \#4 can be done here. 
 
-\subsection{Question about flow rate}
+\subsection{Flow rate in \texttt{inletSecondary}}
 
-The flow rate obtained in this tutorial is different from the one computed in Tutorial \#4. Can you see why? How should the simulation be changed in order to get the same flow rate?		
+The flow rate obtained in this tutorial in \texttt{inletSecondary} is different from the one computed in Tutorial \#4. Can you see why? How should the simulation be changed in order to get the same flow rate?		
+
+\subsection{Mass balance error}
+
+Estimate the error in mass balance in the simulation,
+
+\begin{equation*}
+	\varepsilon = \frac{\left\|Q_o - Q_i\right\|}{Q_i}
+\end{equation*}
+
+\tip{You will need to account for many decimal places in flow rates, since this error is very small. }
 		
 	\end{itemize}
 
